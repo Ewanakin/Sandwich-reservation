@@ -2,6 +2,7 @@
     $dateDebut = 0;
     $dateFin = 0;
     $filtreOk = True;
+    $errorDate = $errorFiltre = $errorSaisie = "";
     session_start();
     require("connexion.php");
     $co = connexionBdd();
@@ -16,7 +17,7 @@
         //la variable dateLocale contient l'heure et la date actuelle
         $dateLocale = date('d-m-y h:i:s');
         //si la date saisie est inférieur à la date acteulle alors error
-        if($_POST["date"] < $dateLocale )
+        if($_POST["dateModif"] < $dateLocale )
         {
             $errorDate = "Vous ne pouvez pas modifier la date de la commande car elle est inferieur à celle du jour";
         }
@@ -24,7 +25,7 @@
         else
         {
             $reqUpdateCommande = $co->prepare("UPDATE commande SET date_heure_livraison_com = ? WHERE id_com = ? ");
-            $req->execute(array($_POST["dateModif"],$_POST["btnModif"]));
+            $reqUpdateCommande->execute(array($_POST["dateModif"],$_POST["btnModifLivraison"]));
         }
     }
     if(isset($_POST["btnSuppr"]))
@@ -36,7 +37,7 @@
     {
         if($_POST["startFilter"] > $_POST["endFilter"])
         {
-            echo"merci de choisir une date de début plus petite que celle de fin";
+            $errorFiltre = "merci de choisir une date de début plus petite que celle de fin";
         }
         else
         {
@@ -50,7 +51,7 @@
         //test de si un des champs de saisie est vide
         if(empty($_POST["startFilter"] and $_POST["endFilter"]))
         {
-            echo"merci de remplir avant de post";
+            $errorSaisie = "les champs doivent etre séléctionnés";
         }
         //si les champs ne sont pas vides test de la saisie
         else
@@ -58,7 +59,7 @@
             //si le filtre de départ séléctionné est plus grand que celui de fin alors erreur
             if($_POST["startFilter"] > $_POST["endFilter"])
             {
-                echo"le filtre n'est pas valide car la valeur de début est plus grande que la valeur de fin";
+                $errorFiltre = "merci de choisir une date de début plus petite que celle de fin";
             }
             //si la saisie est ok alors insert de la date
             else
@@ -127,6 +128,8 @@
                     echo "<input name='endFilter' type='date' value='".$dateFin."'><br>";
                 echo "</div>";
                 echo "<button name='updateFilter' class='Button-Delete' type='submit' value=''>Appliquer le filtre</button>";
+                echo "<h3 class='text-center'>".$errorFiltre."</h3>";
+                echo "<h3 class='text-center'>".$errorSaisie."</h3>";
             echo "</form>";
         ?>
         <a href="deconnexion.php">Déconnexion</a>
@@ -142,6 +145,7 @@
             <!--ajout du filtre-->
             <button name='btnAjoutFiltre' class='Ajout' type='submit'>Ajouter un nouveau filtre</button>
         </form>
+        <p><?php echo $errorSaisie; ?></p>
     </div>
     <!--Affichage des commandes de l'utilsateur-->
     <?php
@@ -192,6 +196,7 @@
                                 echo "<button name='btnModifLivraison' class='bouton_update' type='submit' value=".$row["id_com"].">Modifier la date de commande</button>";
                                 //bouton pour annuler la commande
                                 echo "<button name='btnSupprLivraison' class='bouton_delete' type='submit' value=".$row["id_com"].">Annuler la commande</button>";
+                                echo "<p>".$errorDate."</p>";
                             echo "</div>";
                         echo "</form>";
                     echo "</div>";
