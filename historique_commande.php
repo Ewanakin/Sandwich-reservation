@@ -1,12 +1,14 @@
 <?php
+    //initialisation des variables
     $dateDebut = 0;
     $dateFin = 0;
     $filtreOk = True;
     $errorDate = $errorFiltre = $errorSaisie = "";
+    //création de la session
     session_start();
+    //appel du fichier connexion.php
     require("connexion.php");
     $co = connexionBdd();
-    $test = $_SESSION['username'];
     //requete pour afficher l'utilisateur
     $reqUtilisateur = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
     $reqUtilisateur->execute(array($_SESSION["username"]));
@@ -28,9 +30,10 @@
             $reqUpdateCommande->execute(array($_POST["dateModif"],$_POST["btnModifLivraison"]));
         }
     }
-    if(isset($_POST["btnSuppr"]))
+    if(isset($_POST["btnSupprLivraison"]))
     {
-
+        $supprCom = $co->prepare("UPDATE commande SET annule_com = ? WHERE id_com = ?");
+        $supprCom->execute(array(1,$_POST["btnSupprLivraison"]));
     }
     //modificaction du filtre des commandes
     if(isset($_POST["updateFilter"]))
@@ -168,10 +171,18 @@
         while($row = $reqAffichage -> fetch())
         {
             //la variable $dateCom prend la valeur de la date de la commande
+            
             $dateCom = new DateTime($row["date_heure_livraison_com"]);
             echo "<div class='container contenu_com'>";
                 echo "<div class='text-center'>";
-                    echo "<div class='contenu'>";
+                ?>
+                    <div style="background-color: <?php if($row["annule_com"] == 1) echo"#B2A0AC"?>" class='contenu'>
+                    <?php
+                        //affichage si la commande est annulée
+                        if($row["annule_com"] == 1)
+                        {
+                            echo "<h3 class='com_annule'>La commande est annulée</h3>";
+                        }
                         //affichage de la date et heure de livraison de la commande
                         echo "<h3 class='date_commande'>Commande du ".$dateCom->format('d-m-Y H:i:s')."</h3>";
                         //affichage du contenu de la commande (sandwich, boisson, dessert et chips)
@@ -187,18 +198,31 @@
                             {
                                 echo "paquet de chips";
                             }
+                            else
+                            {
+                                echo "Aucun paquet de chips";
+                            }
                         echo "</p>";
                         //formulaire pour modifier la date de livraison de la commande 
-                        echo "<form method='post' name='button-Up-De' action='' class='formModif'>";
-                            echo "<input name='dateModif' type='datetime-local'><br>";
-                            echo "<div class='marginButton'>";
-                                //bouton pour modifier la date de livraison
-                                echo "<button name='btnModifLivraison' class='bouton_update' type='submit' value=".$row["id_com"].">Modifier la date de commande</button>";
-                                //bouton pour annuler la commande
-                                echo "<button name='btnSupprLivraison' class='bouton_delete' type='submit' value=".$row["id_com"].">Annuler la commande</button>";
-                                echo "<p>".$errorDate."</p>";
-                            echo "</div>";
-                        echo "</form>";
+                        ?>
+                        <div style="background-color: <?php if($row["annule_com"] == 1) echo"#B2A0AC"?>">
+                            <?php
+                                if($row["annule_com"] == 0)
+                                {
+                                    echo "<form method='post' name='button-Up-De' action='' class='formModif'>";
+                                        echo "<input name='dateModif' type='datetime-local'><br>";
+                                        echo "<div class='marginButton'>";
+                                            //bouton pour modifier la date de livraison
+                                            echo "<button name='btnModifLivraison' class='bouton_update' type='submit' value=".$row["id_com"].">Modifier la date de commande</button>";
+                                            //bouton pour annuler la commande
+                                            echo "<button name='btnSupprLivraison' class='bouton_delete' type='submit' value=".$row["id_com"].">Annuler la commande</button>";
+                                            echo "<p>".$errorDate."</p>";
+                                        echo "</div>";
+                                    echo "</form>";
+                                }
+                            ?>
+                        </div>
+                        <?php
                     echo "</div>";
                 echo "</div>";
             echo "</div>";
