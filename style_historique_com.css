@@ -11,6 +11,11 @@
   border-radius: 10px;
   background-color: #fff;
 }
+/*affichage si la commande est annulée*/
+.com_annule
+{
+  color: #2C416E;
+}
 
 /*date de la commande*/
 .date_commande
