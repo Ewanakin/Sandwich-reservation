@@ -6,6 +6,11 @@
         //création de la session
         session_start();
         $idUser = $_SESSION['id_user'];
+        if(isset($_POST["modifUser"]))
+        {
+            $modifUser = $co->prepare("UPDATE utilisateur SET role_user = ? , email_user = ?, password_user = ?, nom_user = ?, prenom_user = ?, active_user = ? WHERE id_user = ?");
+            $modifUser->execute(array($_POST["roleUser"],$_POST["emailUser"],$_POST["passwordUser"],$_POST["nomUser"],$_POST["prenomUser"],$_POST["activeUser"], $idUser));
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +38,7 @@
                             echo "<th scope='col'>Nom</th>";
                             echo "<th scope='col'>Prenom</th>";
                             echo "<th scope='col'>Active</th>";
+                            echo "<th scope='col'>bouton modifier</th>";
                         echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
@@ -40,20 +46,24 @@
                             while($utilisateur = $reqUtilisateur->fetch())
                             {
                                 echo "<tr>";
-                                    //affichage de l'ID de l'utilisateur
-                                    echo "<td>".$utilisateur["id_user"]."</td>";
-                                    //affichage du role de l'utilisateur
-                                    echo "<td>".$utilisateur["role_user"]."</td>";
-                                    //affichage de l'email de l'utilisateur
-                                    echo "<td>".$utilisateur["email_user"]."</td>";
-                                    //affichage du mot de passe de l'utilisateur 
-                                    echo "<td>".$utilisateur["password_user"]."</td>";
-                                    //affichage du nom de l'utilisateur
-                                    echo "<td>".$utilisateur["nom_user"]."</td>";
-                                    //affichage du prénom de l'utilisateur
-                                    echo "<td>".$utilisateur["prenom_user"]."</td>";
-                                    //affichage du status de l'utilisateur
-                                    echo "<td>".$utilisateur["active_user"]."</td>";
+                                    echo "<form method='post'>";
+                                        //affichage de l'ID de l'utilisateur
+                                        echo "<td>".$utilisateur["id_user"]."</td>";
+                                        //affichage du role de l'utilisateur
+                                        echo "<td><input name='roleUser' value='".$utilisateur["role_user"]."'></td>";
+                                        //affichage de l'email de l'utilisateur
+                                        echo "<td><input name='emailUser' value='".$utilisateur["email_user"]."'></td>";
+                                        //affichage du mot de passe de l'utilisateur 
+                                        echo "<td><input name='passwordUser' value='".$utilisateur["password_user"]."'></td>";
+                                        //affichage du nom de l'utilisateur
+                                        echo "<td><input name='nomUser' value='".$utilisateur["nom_user"]."'></td>";
+                                        //affichage du prénom de l'utilisateur
+                                        echo "<td><input name='prenomUser' value='".$utilisateur["prenom_user"]."'></td>";
+                                        //affichage du status de l'utilisateur
+                                        echo "<td><input name='activeUser' value='".$utilisateur["active_user"]."'></td>";
+                                        //bouton validation des modifications
+                                        echo "<td><button type='submit' name='modifUser'>Modifier</button></td>";
+                                    echo "</form>";
                                 echo "</tr>";
                             }
                     echo "</tbody>";
