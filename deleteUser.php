@@ -35,7 +35,10 @@
     //si bouton désactivé est appuyé
     if(isset($_POST["desacUti"]))
     {
+        $desacUser = $co->prepare("UPDATE utilisateur SET active_user = ? WHERE id_user = ?");
+        $desacUser->execute(array(0,$idUser));
         header("Location: admin.php");
+        exit;
     }
 ?>
 <!DOCTYPE html>
