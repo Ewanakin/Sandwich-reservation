@@ -15,20 +15,15 @@
             $pass = password_hash($_POST['pass'], PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]);
             $nom = $_POST['nomUser'];
             $prenom = $_POST['prenomUser'];
-            $activeUser = $_POST['prenomUser'];
-        }
-        if($isSuccessEmpty == true)
-        {
-
+            $activeUser = $_POST['activeUser'];
+            //requete pour insert un utilisateur
+            $insertUser = $co->prepare("INSERT INTO utilisateur (role_user, email_user, password_user, nom_user, prenom_user, active_user) VALUES(?,?,?,?,?,?)");
+            $insertUser->execute(array($role,$email,$pass,$nom,$prenom,$activeUser));
+            header("Location: ../admin.php");
+            exit;
         }
     }
-    
-
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +62,7 @@
             <!--liste déroulante qui permet à l'admin de décider si ce compte sera actif ou non-->
             <select name="activeUser" id="activeUser">
                 <option value="1">Activé</option>
-                <option value="2">Désactivé</option>
+                <option value="0">Désactivé</option>
             </select>
             <button type="submit" name="submit">Créer l'utilisateur</button>
         </form>

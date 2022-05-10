@@ -11,7 +11,7 @@
         $_SESSION['id_user'] = $_POST["btnSupprUti"];
         $_SESSION['username'] = "test";
         // On lance la page index.php à la place de la page actuelle
-        header("Location: deleteUser.php");
+        header("Location: Gestion_Utilisateur/deleteUser.php");
     }
     if(isset($_POST["btnModifUti"]))
     {
@@ -19,7 +19,7 @@
         $_SESSION['id_user'] = $_POST["btnModifUti"];
         $_SESSION['username'] = "test";
         // On lance la page index.php à la place de la page actuelle
-        header("Location: modifUser.php");
+        header("Location: Gestion_Utilisateur/modifUser.php");
     }
 ?>
 <!DOCTYPE html>
@@ -32,24 +32,25 @@
         <link rel="stylesheet" href="admin.css">
     </head>
     <body>
-        
+        <!--affichage de la navbar(faire un include)-->
         <div class="navbar">
             <a class="active" href="./index.php">Réservation <br> Sandwich</a>
             <a style="float: right" href="#news">Se déconnecter</a>
         </div>
-
+        <!--redirection vers la création d'un utilisateur-->
+        <a href="Gestion_Utilisateur/insertion.php">Ajouter un nouvel utilisateur</a>
         <div id="table-scroll" class="table-scroll" style='max-width:500px;margin-top: 200px;'>
             <div class="table-wrap">
                 <table class="main-table">
                     <thead>
-                    <tr>
-                        <th scope="col">Id Utilisateur</th>
-                        <th scope="col">Prenom utilisateur</th>
-                        <th scope="col">Nom utilisateur</th>
-                        <th scope="col">active</th>
-                        <th scope="col">Modifier utilisateur</th>
-                        <th scope="col">Supprimer utilisateur</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Id Utilisateur</th>
+                            <th scope="col">Prenom utilisateur</th>
+                            <th scope="col">Nom utilisateur</th>
+                            <th scope="col">active</th>
+                            <th scope="col">Modifier utilisateur</th>
+                            <th scope="col">Supprimer utilisateur</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php
@@ -80,6 +81,7 @@
                 </table>
             </div>
         </div>
+        <!--affichage du footer-->
         <footer>
             <p>Footer Saint-Vincent</p>
         </footer>
