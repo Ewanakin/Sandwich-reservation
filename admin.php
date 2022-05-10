@@ -45,7 +45,7 @@
                                         //affichage du prenom de l'utilisateur
                                         echo "<td>".$utilisateur["prenom_user"]."</td>";
                                         //affichage du nom de l'utilisateur 
-                                        echo "<td>".$utilisateur["nom_user"]."s</td>";
+                                        echo "<td>".$utilisateur["nom_user"]."</td>";
                                         //bouton pour supprimer un utilisateur
                                         echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnSupprUti'>supprimer</button></td>";
                                     echo "</form>";
