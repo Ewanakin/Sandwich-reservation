@@ -3,6 +3,36 @@
     require "connexion.php";
     //$co prend la valeur de retour de la fonction connexionBdd()
     $co = connexionBdd();
+    //création de la session
+    session_start();
+    $idUser = $_SESSION['id_user'];
+    //si bouton annuler l'opération est appuyé
+    if(isset($_POST["annuleSuppr"]))
+    {
+        header("Location: admin.php");
+        exit;
+    }
+    //si bouton supprimer l'utilisateur appuyé
+    if(isset($_POST["supprUti"]))
+    {
+        $verifHist = $co->prepare("SELECT * FROM historique WHERE fk_user_id = ?");
+        $verifHist->execute(array($idUser));
+        $nbHist = $verifHist->rowCount();
+        if($nbHist > 0)
+        {
+            $deleteHist = $co->prepare("DELETE FROM historique WHERE fk_user_id = ?");
+            $deleteHist->execute(array($idUser));
+        }
+        $reqDeleteUser = $co->prepare("DELETE FROM utilisateur WHERE id_user = ?");
+        $reqDeleteUser->execute(array($idUser));
+        header("Location: admin.php");
+        exit;
+    }
+    //si bouton désactivé est appuyé
+    if(isset($_POST["desacUti"]))
+    {
+        header("Location: admin.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,48 +44,82 @@
         <link href="admin.css" rel="stylesheet">
     </head>
     <body>
-        <div id="table-scroll" class="table-scroll" style='max-width:500px;margin-top: 200px;'>
-            <div class="table-wrap">
-                <table class="main-table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id commande</th>
-                        <th scope="col">Sandwich</th>
-                        <th scope="col">boisson</th>
-                        <th scope="col">dessert</th>
-                        <th scope="col">chips</th>
-                        <th scope="col">date livraison commande</th>
-                        <th scope="col">commande annule</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            //requete pour afficher 
-                            $reqCommandeUti = $co->prepare("SELECT * FROM commande WHERE fk_user_id = '".$_POST["btnSupprUti"]."'");
-                            $reqCommandeUti->execute();
-                            while($comUti = $reqCommandeUti->fetch())
-                            {
+        <?php
+            //requete pour afficher les commandes de l'utilisateur
+            $reqCommandeUti = $co->prepare("SELECT * FROM commande WHERE fk_user_id = '".$idUser."'");
+            $reqCommandeUti->execute();
+            $nbCom = $reqCommandeUti->rowCount();
+            //jointure pour afficher le sandwich
+            $reqSandwich = $co->prepare("SELECT * FROM sandwich INNER JOIN commande ON sandwich.id_sandwich = commande.fk_sandwich_id");
+            $reqSandwich->execute();
+            $sandwich = $reqSandwich->fetch();
+            //jointure pour afficher la boisson
+            $reqBoisson = $co->prepare("SELECT * FROM boisson INNER JOIN commande ON boisson.id_boisson = commande.fk_boisson_id");
+            $reqBoisson->execute();
+            $boisson = $reqBoisson->fetch();
+            //jointure pour afficher le dessert
+            $reqDessert = $co->prepare("SELECT * FROM dessert INNER JOIN commande ON dessert.id_dessert = commande.fk_boisson_id");
+            $reqDessert->execute();
+            $dessert = $reqDessert->fetch();
+            if($nbCom > 0)
+            {
+                echo "<h3>Vous ne pouvez pas supprimer cet utilisateur</h3>";
+                echo "<h3>Car il possede deja des commandes</h3>";
+                echo "<div id='table-scroll' class='table-scroll' style='max-width:500px;margin-top: 200px;'>";
+                    echo " <div class='table-wrap'>";
+                        echo "<h3>Les commandes de l'utilisateur</h3>";
+                        echo "<table class='main-table'>";
+                            echo "<thead>";
                                 echo "<tr>";
-                                    //affichage de l'ID de la commande
-                                    echo "<td>".$comUti["id_com"]."</td>";
-                                    //affichage du sandwich de la commande
-                                    echo "<td>".$comUti["fk_sandwich_id"]."</td>";
-                                    //affichage de la boisson
-                                    echo "<td>".$comUti["fk_boisson_id"]."</td>";
-                                    //affichage du dessert 
-                                    echo "<td>".$comUti["fk_dessert_id"]."</td>";
-                                    //affichage du choix de paquet de chips
-                                    echo "<td>".$comUti["chips_com"]."</td>";
-                                    //affichage de la date de livraison de la commande
-                                    echo "<td>".$comUti["date_heure_livraison_com"]."</td>";
-                                    //affichage du status de la commande 
-                                    echo "<td>".$comUti["annule_com"]."</td>";
+                                    echo "<th scope='col'>Id commande</th>";
+                                    echo "<th scope='col'>Sandwich</th>";
+                                    echo "<th scope='col'>boisson</th>";
+                                    echo "<th scope='col'>dessert</th>";
+                                    echo "<th scope='col'>chips</th>";
+                                    echo "<th scope='col'>date livraison commande</th>";
+                                    echo "<th scope='col'>commande annule</th>";
                                 echo "</tr>";
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                            echo "</thead>";
+                            echo "<tbody>";
+                                    while($comUti = $reqCommandeUti->fetch())
+                                    {
+                                        echo "<tr>";
+                                            //affichage de l'ID de la commande
+                                            echo "<td>".$comUti["id_com"]."</td>";
+                                            //affichage du sandwich de la commande
+                                            echo "<td>".$sandwich["nom_sandwich"]."</td>";
+                                            //affichage de la boisson
+                                            echo "<td>".$boisson["nom_boisson"]."</td>";
+                                            //affichage du dessert 
+                                            echo "<td>".$dessert["nom_dessert"]."</td>";
+                                            //affichage du choix de paquet de chips
+                                            echo "<td>".$comUti["chips_com"]."</td>";
+                                            //affichage de la date de livraison de la commande
+                                            echo "<td>".$comUti["date_heure_livraison_com"]."</td>";
+                                            //affichage du status de la commande 
+                                            echo "<td>".$comUti["annule_com"]."</td>";
+                                        echo "</tr>";
+                                    }
+                            echo "</tbody>";
+                        echo "</table>";
+                    echo "</div>";
+                echo "</div>";
+                echo "<h3>Voulez vous désactiver cet utilisateur ?</h3>";
+                echo "<form method='post'>";
+                    echo "<button type='submit' name='annuleSuppr'>Annuler</button>";
+                    echo "<button type='submit' name='desacUti'>Désactiver</button>";
+                echo "</form>";
+            }
+            else
+            {
+                echo "<h3>Etes vous sur de vouloir supprimer cet Utilisateur ?</h3>";
+                echo "<form method='post' name='supprUti'>";
+                    echo "<button type='submit' name='annuleSuppr' >Annuler</button>";
+                    echo "<button type='submit' name='supprUti'>Supprimer</button>";
+                echo "</form>";
+            }
+        ?>
+
+
     </body>
 </html>
