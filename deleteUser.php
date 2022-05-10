@@ -36,19 +36,19 @@
                             while($comUti = $reqCommandeUti->fetch())
                             {
                                 echo "<tr>";
-                                    //affichage de l'ID de l'utilisateur
+                                    //affichage de l'ID de la commande
                                     echo "<td>".$comUti["id_com"]."</td>";
-                                    //affichage du prenom de l'utilisateur
+                                    //affichage du sandwich de la commande
                                     echo "<td>".$comUti["fk_sandwich_id"]."</td>";
-                                    //affichage du nom de l'utilisateur 
+                                    //affichage de la boisson
                                     echo "<td>".$comUti["fk_boisson_id"]."</td>";
-                                    //affichage du nom de l'utilisateur 
+                                    //affichage du dessert 
                                     echo "<td>".$comUti["fk_dessert_id"]."</td>";
-                                    //affichage du nom de l'utilisateur 
+                                    //affichage du choix de paquet de chips
                                     echo "<td>".$comUti["chips_com"]."</td>";
-                                    //affichage du nom de l'utilisateur 
+                                    //affichage de la date de livraison de la commande
                                     echo "<td>".$comUti["date_heure_livraison_com"]."</td>";
-                                    //affichage du nom de l'utilisateur 
+                                    //affichage du status de la commande 
                                     echo "<td>".$comUti["annule_com"]."</td>";
                                 echo "</tr>";
                             }
