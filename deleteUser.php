@@ -15,16 +15,20 @@
     //si bouton supprimer l'utilisateur appuyé
     if(isset($_POST["supprUti"]))
     {
+        //vérification de si l'utilisateur possède un filtre
         $verifHist = $co->prepare("SELECT * FROM historique WHERE fk_user_id = ?");
         $verifHist->execute(array($idUser));
         $nbHist = $verifHist->rowCount();
+        //si il possède un filtre on éfféctue la suppression du filtre
         if($nbHist > 0)
         {
             $deleteHist = $co->prepare("DELETE FROM historique WHERE fk_user_id = ?");
             $deleteHist->execute(array($idUser));
         }
+        //execution de la requete pour supprimer un utilisateur
         $reqDeleteUser = $co->prepare("DELETE FROM utilisateur WHERE id_user = ?");
         $reqDeleteUser->execute(array($idUser));
+        //retour sur la page admin.php
         header("Location: admin.php");
         exit;
     }
