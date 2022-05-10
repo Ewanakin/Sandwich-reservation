@@ -8,7 +8,7 @@
     if(isset($_POST['submit']))
     {
         include('verifInsertionUtilisateur/checkEmptyUtilisateur.php');
-        if($isSuccessEmpty == true)
+        if($isSuccessEmpty == true) // seulement is les champs ne sont pas vides
         {
             $role = $_POST['roleUser'];
             $email = $_POST['email'];
