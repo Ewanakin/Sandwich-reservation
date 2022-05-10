@@ -23,6 +23,11 @@
             exit;
         }
     }
+    if(isset($_POST["annuler"]))
+    {
+        header("Location: ../admin.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +70,7 @@
                 <option value="0">Désactivé</option>
             </select>
             <button type="submit" name="submit">Créer l'utilisateur</button>
+            <button type="submit" name="annuler">Annuler la création d'utilisateur</button>
         </form>
     </section>
 </body>
