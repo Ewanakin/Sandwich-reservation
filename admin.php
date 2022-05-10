@@ -5,6 +5,22 @@
     $co = connexionBdd();
     //création de la session
     session_start();
+    if(isset($_POST["btnSupprUti"]))
+    {
+        // On définit la variable de session username avec la valeur saisie par l'utilisateur
+        $_SESSION['id_user'] = $_POST["btnSupprUti"];
+        $_SESSION['username'] = "test";
+        // On lance la page index.php à la place de la page actuelle
+        header("Location: deleteUser.php");
+    }
+    if(isset($_POST["btnModifUti"]))
+    {
+        // On définit la variable de session username avec la valeur saisie par l'utilisateur
+        $_SESSION['id_user'] = $_POST["btnModifUti"];
+        $_SESSION['username'] = "test";
+        // On lance la page index.php à la place de la page actuelle
+        header("Location: modifUser.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +47,8 @@
                         <th scope="col">Prenom utilisateur</th>
                         <th scope="col">Nom utilisateur</th>
                         <th scope="col">active</th>
-                        <th scope="col">supprimer utilisateur</th>
+                        <th scope="col">Modifier utilisateur</th>
+                        <th scope="col">Supprimer utilisateur</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,18 +68,12 @@
                                         echo "<td>".$utilisateur["nom_user"]."</td>";
                                         //affichage du status de l'utilisateur
                                         echo "<td>".$utilisateur["active_user"]."</td>";
+                                        //bou_ton pour modifier les informations d'un utilisateur
+                                        echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnModifUti'>Modifier</button></td>";
                                         //bouton pour supprimer un utilisateur
-                                        echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnSupprUti'>supprimer</button></td>";
+                                        echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnSupprUti'>Supprimer</button></td>";
                                     echo "</form>";
                                 echo "</tr>";
-                            }
-                            if(isset($_POST["btnSupprUti"]))
-                            {
-                                // On définit la variable de session username avec la valeur saisie par l'utilisateur
-                                $_SESSION['id_user'] = $_POST["btnSupprUti"];
-                                $_SESSION['username'] = "test";
-                                // On lance la page index.php à la place de la page actuelle
-                                header("Location: deleteUser.php");
                             }
                         ?>
                     </tbody>
