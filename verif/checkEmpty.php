@@ -1,41 +1,50 @@
 <?php
-    $isSuccessEmpty = false;
+    $isSuccessEmpty=$isSuccessEmptySandwich=$isSuccessEmptyBoisson=$isSuccessEmptyDessert = false;
+    $isSuccessEmptyHeure = false;
     $errorSandwich=$errorBoisson=$errorDessert=$errorDispoSandwich=$errorDispoBoisson=$errorDispoDessert=$errorHeureChoix = "";
     //vérification des champs, si les champs ne sont pas sélectionnés -> impossibilité de réserver
     if(empty($_POST['sandwich']))
     {  
         $errorSandwich = "Choisissez un sandwich. ";
-        $isSuccessEmpty = false;
+        $isSuccessEmptySandwich = false;
     }
     else{
-        $isSuccessEmpty = true;
+        $isSuccessEmptySandwich = true;
     }
 
     if(empty($_POST['boisson']))
     {  
         $errorBoisson = "Choisissez une boisson. ";
-        $isSuccessEmpty = false;
+        $isSuccessEmptyBoisson = false;
     }
     else{
-        $isSuccessEmpty = true;
+        $isSuccessEmptyBoisson = true;
     }
 
     if(empty($_POST['dessert']))
     {  
         $errorDessert = "Choisissez un dessert. ";
-        $isSuccessEmpty = false;
+        $isSuccessEmptyDessert = false;
     }
     else{
-        $isSuccessEmpty = true;
+        $isSuccessEmptyDessert = true;
     }
+
 
     if(empty($_POST['heure']))
     {
         $errorHeureChoix = "Veuillez choisir une heure de livraison. ";
-        $isSuccessEmpty = false;
+        $isSuccessEmptyHeure = false;
     }
     else{
-        $isSuccessEmpty = true;
+        $isSuccessEmptyHeure = true;
     }
 
+    if($isSuccessEmptyBoisson == true and $isSuccessEmptyDessert == true and $isSuccessEmptySandwich == true and $isSuccessEmptyHeure == true)
+    {
+        $isSuccessEmpty = true;
+    }
+    else{
+        $isSuccessEmpty = false;
+    }
 ?>

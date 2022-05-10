@@ -12,7 +12,8 @@
     $errorDate = "";
     $errorWeekend = "";
     $errorDateSupp = "";
-    $sandwich = $dessert = $boisson = $heure = "";
+    $ErrorValue = "";
+    $sandwich = $dessert = $boisson = $reservationHour = "";
     
     $isSuccess = false;
     $heureLimite = "09:30";
@@ -33,11 +34,13 @@
             $sandwich = $_POST['sandwich']; //récupère le chhoix du sandwich
             $dessert = $_POST['dessert'];//récupère le choix du dessert
             $boisson =  $_POST['boisson'];//récupère le choix de la boisson
-            $chips = $_POST['chips'];//récupère le choix des chips
             $reservationHour = $_POST['heure']; //récupère l'heure de réservation
-        }
+            
+        }    
+        $chips = $_POST['chips'];//récupère le choix des chips
         $reservationDate = $_POST['date']; //récupère la date de réservation
         $timestampJour = strtotime($reservationDate); //conversion de la date sous format timestamp unix
+        include('../verif/checkValue.php');//fichier de vérification de la value du sandwich.
         $formatJour="w"; // changement du format de la date en jour de la semaine de 0 à 6
         $jourInterdit = date($formatJour, $timestampJour); // Création d'une variable qui récupère le numéro de jour pour ensuite le comparer
         
@@ -179,6 +182,7 @@
                         echo'<p> '.$errorHeure.' </p>';
                         echo'<p> '.$errorWeekend.' </p>';
                         echo'<p> '.$errorDateSupp.' </p>';
+                        echo'<p> '.$ErrorValue.' </p>';
                     echo'</div>';
                 ?>
                 <div id="btnSubmit">

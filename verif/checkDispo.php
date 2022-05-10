@@ -1,5 +1,5 @@
 <?php
-    $isSuccessIndispo = false;
+    $isSuccessIndispo=$isSuccessIndispoSandwich=$isSuccessIndispoBoisson=$isSuccessIndispoDessert = false;
 
     $query = $co->prepare('SELECT dispo_sandwich FROM sandwich where id_sandwich=:id');
     $query->bindParam(':id', $sandwich);
@@ -8,12 +8,12 @@
 
     if($result[0] < 1 and !empty($sandwich))
     {
-        $isSuccessIndispo = false;
+        $isSuccessIndispoSandwich = false;
         $errorDispoSandwich = "Le sandwich n'est pas disponible.";
 
     }
     else{
-        $isSuccessIndispo = true;
+        $isSuccessIndispoSandwich = true;
     }
 
     $query = $co->prepare('SELECT dispo_boisson FROM boisson where id_boisson=:id');
@@ -23,11 +23,11 @@
 
     if($result[0] < 1 and !empty($boisson))
     {
-        $isSuccessIndispo = false;
+        $isSuccessIndispoBoisson = false;
         $errorDispoBoisson = "La boisson n'est pas disponible.";
     }
     else{
-        $isSuccessIndispo = true;
+        $isSuccessIndispoBoisson = true;
     }
 
     $query = $co->prepare('SELECT dispo_dessert FROM dessert where id_dessert=:id');
@@ -37,11 +37,19 @@
 
     if($result[0] < 1  and !empty($dessert))
     {
-        $isSuccessIndispo = false;
+        $isSuccessIndispoDessert = false;
         $errorDispoDessert = "Le dessert n'est pas disponible.";
     }
     else{
-        $isSuccessIndispo = true;
+        $isSuccessIndispoDessert = true;
     }
 
+    if($isSuccessIndispoSandwich == true and $isSuccessIndispoBoisson == true and $isSuccessIndispoDessert == true)
+    {
+        $isSuccessIndispo = true;
+    }
+    else
+    {
+        $isSuccessIndispo = false;
+    }
 ?>

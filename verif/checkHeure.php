@@ -1,5 +1,5 @@
 <?php
-    $isSuccessHeure;
+    $isSuccessHeure = false;
     if($reservationDate == $dt AND $HeureActuel >= $heureL )
     {
         $isSuccessHeure = false;
