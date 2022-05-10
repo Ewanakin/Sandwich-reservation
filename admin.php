@@ -1,3 +1,9 @@
+<?php
+    //appel du fichier de connexion à la BDD   
+    require "connexion.php";
+    //$co prend la valeur de retour de la fonction connexionBdd()
+    $co = connexionBdd();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,6 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Page gestion des utilisateurs</title>
+        <link rel="stylesheet" href="admin.css">
     </head>
     <body>
         
@@ -18,43 +25,39 @@
                 <table class="main-table">
                     <thead>
                     <tr>
-                        <th class="fixed-side" scope="col">&nbsp;</th>
-                        <th scope="col">Liste des utilisateurs</th>
+                        <th scope="col">Id Utilisateur</th>
+                        <th scope="col">Prenom utilisateur</th>
+                        <th scope="col">Nom utilisateur</th>
+                        <th scope="col">supprimer utilisateur</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th class="fixed-side">ID 1</th>
-                        <td>Eleve 1</td>
-                        <td>Liste des sandwichs</td>
-                        <td>Modifier Supprimer</td>
-                    </tr>
-                    <tr>
-                        <th class="fixed-side">ID 2</th>
-                        <td>Eleve 2</td>
-                        <td>Liste des sandwichs</td>
-                        <td>Modifier Supprimer</td>
-                    </tr>
-                    <tr>
-                        <th class="fixed-side">ID 3</th>
-                        <td>Eleve 3</td>
-                        <td>Liste des sandwichs</td>
-                        <td>Modifier Supprimer</td>
-                    </tr>
-                    <tr>
-                        <th class="fixed-side">ID 4</th>
-                        <td>Eleve 4</td>
-                        <td>Liste des sandwichs</td>
-                        <td>Modifier Supprimer</td>
-                    </tr>
+                        <?php
+                            //requete pour afficher 
+                            $reqUser = $co->prepare("SELECT * FROM utilisateur WHERE role_user = 'b'");
+                            $reqUser->execute();
+                            while($utilisateur = $reqUser->fetch())
+                            {
+                                echo "<tr>";
+                                    echo "<form method='post' name='formUtilisateur' action='deleteUser.php'>";
+                                        //affichage de l'ID de l'utilisateur
+                                        echo "<td>".$utilisateur["id_user"]."</td>";
+                                        //affichage du prenom de l'utilisateur
+                                        echo "<td>".$utilisateur["prenom_user"]."</td>";
+                                        //affichage du nom de l'utilisateur 
+                                        echo "<td>".$utilisateur["nom_user"]."s</td>";
+                                        //bouton pour supprimer un utilisateur
+                                        echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnSupprUti'>supprimer</button></td>";
+                                    echo "</form>";
+                                echo "</tr>";
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
-<!-- comment -->
         <footer>
             <p>Footer Saint-Vincent</p>
         </footer>
-        
     </body>
 </html>
