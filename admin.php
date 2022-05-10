@@ -30,6 +30,7 @@
                         <th scope="col">Id Utilisateur</th>
                         <th scope="col">Prenom utilisateur</th>
                         <th scope="col">Nom utilisateur</th>
+                        <th scope="col">active</th>
                         <th scope="col">supprimer utilisateur</th>
                     </tr>
                     </thead>
@@ -48,6 +49,8 @@
                                         echo "<td>".$utilisateur["prenom_user"]."</td>";
                                         //affichage du nom de l'utilisateur 
                                         echo "<td>".$utilisateur["nom_user"]."</td>";
+                                        //affichage du status de l'utilisateur
+                                        echo "<td>".$utilisateur["active_user"]."</td>";
                                         //bouton pour supprimer un utilisateur
                                         echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnSupprUti'>supprimer</button></td>";
                                     echo "</form>";
