@@ -7,7 +7,7 @@
     //création de la session
     session_start();
     //appel du fichier connexion.php
-    require("connexion.php");
+    require("../connexion.php");
     $co = connexionBdd();
     //requete pour afficher l'utilisateur
     $reqUtilisateur = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
