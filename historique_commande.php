@@ -99,8 +99,6 @@
             $date = $reqFiltre->fetch();
             // On compte le nombre de lignes résultats de la requête
             $nbFiltres = $reqFiltre->rowCount();
-
-
             //si dans la base de donnée l'utilisateur possède au moins un filtre alors le filtre de début et de fin sont ajoutés à 2 variables
             if($nbFiltres > 0)
             {
@@ -130,7 +128,7 @@
                     //bouton modification fin du filtre
                     echo "<input name='endFilter' type='date' value='".$dateFin."'><br>";
                 echo "</div>";
-                echo "<button name='updateFilter' class='Button-Delete' type='submit' value=''>Appliquer le filtre</button>";
+                echo "<button name='updateFilter' class='bouton_delete' type='submit' value=''>Appliquer le filtre</button>";
                 echo "<h3 class='text-center'>".$errorFiltre."</h3>";
                 echo "<h3 class='text-center'>".$errorSaisie."</h3>";
             echo "</form>";
