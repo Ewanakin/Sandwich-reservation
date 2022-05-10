@@ -3,6 +3,8 @@
     require "connexion.php";
     //$co prend la valeur de retour de la fonction connexionBdd()
     $co = connexionBdd();
+    //création de la session
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,17 +41,25 @@
                             while($utilisateur = $reqUser->fetch())
                             {
                                 echo "<tr>";
-                                    echo "<form method='post' name='formUtilisateur' action='deleteUser.php'>";
+                                    echo "<form method='post' name='formUtilisateur' action=''>";
                                         //affichage de l'ID de l'utilisateur
                                         echo "<td>".$utilisateur["id_user"]."</td>";
                                         //affichage du prenom de l'utilisateur
                                         echo "<td>".$utilisateur["prenom_user"]."</td>";
                                         //affichage du nom de l'utilisateur 
-                                        echo "<td>".$utilisateur["nom_user"]."s</td>";
+                                        echo "<td>".$utilisateur["nom_user"]."</td>";
                                         //bouton pour supprimer un utilisateur
                                         echo "<td><button type='submit' value=".$utilisateur["id_user"]." name='btnSupprUti'>supprimer</button></td>";
                                     echo "</form>";
                                 echo "</tr>";
+                            }
+                            if(isset($_POST["btnSupprUti"]))
+                            {
+                                // On définit la variable de session username avec la valeur saisie par l'utilisateur
+                                $_SESSION['id_user'] = $_POST["btnSupprUti"];
+                                $_SESSION['username'] = "test";
+                                // On lance la page index.php à la place de la page actuelle
+                                header("Location: deleteUser.php");
                             }
                         ?>
                     </tbody>
