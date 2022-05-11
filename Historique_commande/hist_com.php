@@ -175,7 +175,7 @@
             echo "<div class='container contenu_com'>";
                 echo "<div class='text-center'>";
                 ?>
-                    <div style="background-color: <?php if($row["annule_com"] == 1) echo"#B2A0AC"?>" class='contenu'>
+                    <div style="background-color: <?php if($row["annule_com"] == 1) echo"818181"?>" class='contenu'>
                     <?php
                         //affichage si la commande est annulée
                         if($row["annule_com"] == 1)
@@ -204,7 +204,7 @@
                         echo "</p>";
                         //formulaire pour modifier la date de livraison de la commande 
                         ?>
-                        <div style="background-color: <?php if($row["annule_com"] == 1) echo"#B2A0AC"?>">
+                        <div style="background-color: <?php if($row["annule_com"] == 1) echo"818181"?>">
                             <?php
                                 if($row["annule_com"] == 0)
                                 {
