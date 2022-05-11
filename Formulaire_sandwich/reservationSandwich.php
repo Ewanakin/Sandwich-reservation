@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../connexion/connexion.php');
+    include('../Connexion/connexion.php');
     $co = connectDB();
 
     $date = new DateTime(); // objet date qui utilise la date et l'heure courante
@@ -44,16 +44,16 @@
         $formatJour="w"; // changement du format de la date en jour de la semaine de 0 à 6
         $jourInterdit = date($formatJour, $timestampJour); // Création d'une variable qui récupère le numéro de jour pour ensuite le comparer
         
-        include('../verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
-        include('../verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
-        include('../verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
-        include('../verif/checkDispo.php'); //fichier de vérification qu'un éléments n'est pas indisponible 
-        include('../verif/success.php'); // fichier de vérification que toutes les vérifications sont respectés
+        include('verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
+        include('verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
+        include('verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
+        include('verif/checkDispo.php'); //fichier de vérification qu'un éléments n'est pas indisponible 
+        include('verif/success.php'); // fichier de vérification que toutes les vérifications sont respectés
         
         if($isSuccess == true) // si toutes les vérifications sont bonnes
         {
-            include('../session/sessionInit.php');
-            header('Location: ../validation/validation.php');
+            include('session/sessionInit.php');
+            header('Location: validation/validation.php');
         }
     }
 ?>
@@ -75,7 +75,7 @@
 <body>
     <section id="Reservation">
         <div id="header">
-            <h1><img src="../image/resa.svg" alt="iconeRepas" class="resa"> Réservez votre repas <img src="../image/resa.svg" alt="iconeRepas" class="resa"></h1>
+            <h1><img src="../Images/resa.svg" alt="iconeRepas" class="resa"> Réservez votre repas <img src="../image/resa.svg" alt="iconeRepas" class="resa"></h1>
             <span id="blue_divider"></span>
         </div>
         <div id="ResExt">
@@ -85,7 +85,7 @@
                         $query = $co->prepare('SELECT * FROM sandwich'); //selectionne tous les éléments de la table sandwich
                         $query->execute();
                         echo   '<div class="listeChoix">
-                                <img src="../image/sandwichLogo2.svg" alt="sandwich">
+                                <img src="../Images/sandwichLogo2.svg" alt="sandwich">
                                 <Select name="sandwich">
                                     <option value="'.$sandwich.'" disabled selected>Choisir un sandwich</option>';
                                 while($result = $query->fetch()) // stock dans un tableau le résultat 
@@ -108,7 +108,7 @@
                         $query = $co->prepare('SELECT * FROM boisson');
                         $query->execute();
                     echo    '<div class="listeChoix">
-                                <img src="../image/canette.svg" alt="boisson">
+                                <img src="../Images/canette.svg" alt="boisson">
                                 <Select name="boisson">
                                     <option value="'.$boisson.'" disabled selected>Choisir une boisson</option>';
                                 while($result = $query->fetch())
@@ -131,7 +131,7 @@
                         $query = $co->prepare('SELECT * FROM dessert');
                         $query->execute();
                     echo    '<div class="listeChoix">
-                                <img src="../image/cookie.svg" alt="dessert">
+                                <img src="../Images/cookie.svg" alt="dessert">
                                 <Select name="dessert">
                                     <option value="'.$dessert.'" disabled selected>Choisir un dessert</option>';
                                 while($result = $query->fetch())
@@ -152,7 +152,7 @@
                     ?>
                 </div>
                 <div id="choixChips">        
-                    <h4>Voulez-vous des chips ? <img src="../image/chips.png" alt="chips"></h4>
+                    <h4>Voulez-vous des chips ? <img src="../Images/chips.png" alt="chips"></h4>
                     <div id="radiobtn">
                         <div class="radio">
                             <label for="oui">Oui</label>
