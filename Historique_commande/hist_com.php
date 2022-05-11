@@ -119,6 +119,7 @@
             echo"<h3>".$uti["nom_user"]."</h3>";
             //affichage du prénom de l'utilisateur
             echo"<h3>".$uti["prenom_user"]."</h3>";
+            echo "<a class='menu_element' href='../index.php'>Accueil</a>";
             echo "<h3>Modifier le filtre</h3>";
             //formulaire pour modifier le filtre de l'affichage des commandes
             echo "<form method='post' name='updateFilter' action='' class='text-center'>";
@@ -133,7 +134,7 @@
                 echo "<h3 class='text-center'>".$errorSaisie."</h3>";
             echo "</form>";
         ?>
-        <a href="deconnexion.php">Déconnexion</a>
+        <a class="menu_element" href="deconnexion.php">Déconnexion</a>
     </div>
     <!--si la variable filtreOk est en False alors affichage du formulaire-->
     <div style="display:<?php if($filtreOk) echo 'none';?> ">

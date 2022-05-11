@@ -23,6 +23,12 @@
   color: #FFBD00;
 }
 
+/**/
+.menu_element:hover
+{
+  color: #FFBD00;
+}
+
 /*fond de la commande*/
 .background_commande
 {
