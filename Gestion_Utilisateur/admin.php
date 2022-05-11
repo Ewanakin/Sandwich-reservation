@@ -1,6 +1,6 @@
 <?php
     //appel du fichier de connexion à la BDD   
-    require "connexion.php";
+    require "../Connexion/connexion.php";
     //$co prend la valeur de retour de la fonction connexionBdd()
     $co = connexionBdd();
     //création de la session
@@ -11,7 +11,7 @@
         $_SESSION['id_user'] = $_POST["btnSupprUti"];
         $_SESSION['username'] = "test";
         // On lance la page index.php à la place de la page actuelle
-        header("Location: Gestion_Utilisateur/deleteUser.php");
+        header("Location: ../Gestion_Utilisateur/deleteUser.php");
     }
     if(isset($_POST["btnModifUti"]))
     {
@@ -19,7 +19,7 @@
         $_SESSION['id_user'] = $_POST["btnModifUti"];
         $_SESSION['username'] = "test";
         // On lance la page index.php à la place de la page actuelle
-        header("Location: Gestion_Utilisateur/modifUser.php");
+        header("Location: ../Gestion_Utilisateur/modifUser.php");
     }
 ?>
 <!DOCTYPE html>
@@ -34,11 +34,11 @@
     <body>
         <!--affichage de la navbar(faire un include)-->
         <div class="navbar">
-            <a class="active" href="./index.php">Réservation <br> Sandwich</a>
+            <a class="active" href="../index.php">Réservation <br> Sandwich</a>
             <a style="float: right" href="#news">Se déconnecter</a>
         </div>
         <!--redirection vers la création d'un utilisateur-->
-        <a href="Gestion_Utilisateur/insertion.php">Ajouter un nouvel utilisateur</a>
+        <a href="../Gestion_Utilisateur/insertion.php">Ajouter un nouvel utilisateur</a>
         <div id="table-scroll" class="table-scroll" style='max-width:500px;margin-top: 200px;'>
             <div class="table-wrap">
                 <table class="main-table">

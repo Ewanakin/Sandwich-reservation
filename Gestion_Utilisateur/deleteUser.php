@@ -1,6 +1,6 @@
 <?php
     //appel du fichier de connexion à la BDD   
-    require "../connexion.php";
+    require "../Connexion/connexion.php";
     //$co prend la valeur de retour de la fonction connexionBdd()
     $co = connexionBdd();
     //création de la session
@@ -9,7 +9,7 @@
     //si bouton annuler l'opération est appuyé
     if(isset($_POST["annuleSuppr"]))
     {
-        header("Location: ../admin.php");
+        header("Location: admin.php");
         exit;
     }
     //si bouton supprimer l'utilisateur appuyé
@@ -29,7 +29,7 @@
         $reqDeleteUser = $co->prepare("DELETE FROM utilisateur WHERE id_user = ?");
         $reqDeleteUser->execute(array($idUser));
         //retour sur la page admin.php
-        header("Location: ../admin.php");
+        header("Location: admin.php");
         exit;
     }
     //si bouton désactivé est appuyé
@@ -37,7 +37,7 @@
     {
         $desacUser = $co->prepare("UPDATE utilisateur SET active_user = ? WHERE id_user = ?");
         $desacUser->execute(array(0,$idUser));
-        header("Location: ../admin.php");
+        header("Location: admin.php");
         exit;
     }
 ?>
@@ -48,7 +48,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Page Suppression Utilisateur</title>
-        <link href="../admin.css" rel="stylesheet">
+        <link href="admin.css" rel="stylesheet">
     </head>
     <body>
         <?php

@@ -1,6 +1,6 @@
 <?php
         //appel du fichier de connexion à la BDD   
-        require "../connexion.php";
+        require "../Connexion/connexion.php";
         //$co prend la valeur de retour de la fonction connexionBdd()
         $co = connexionBdd();
         //création de la session
@@ -24,12 +24,12 @@
                 $modifUser = $co->prepare("UPDATE utilisateur SET email_user = ?, password_user = ?, nom_user = ?, prenom_user = ?, active_user = ? WHERE id_user = ?");
                 $modifUser->execute(array($_POST["emailUser"],$password,$_POST["nomUser"],$_POST["prenomUser"],$_POST["activeUser"], $idUser));
             }
-            header("Location: ../admin.php");
+            header("Location: admin.php");
             exit;
         }
         if(isset($_POST["annulModif"]))
         {
-            header("Location: ../admin.php");
+            header("Location: admin.php");
             exit;
         }
         
