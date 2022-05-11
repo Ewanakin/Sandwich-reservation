@@ -79,9 +79,9 @@
         <title>Page historique de commande</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <link href="style_historique_com.css" rel="stylesheet">
+        <link href="hist_com.css" rel="stylesheet">
         <meta charset="utf-8">
-        <script src="js_hist_com.js"></script>
+        <script src="menu_hist_com.js"></script>
     </head>
     <body>
     <!--bouton pour afficher la sidebar-->
@@ -115,11 +115,11 @@
                 //affichage alerte en js pour prévenir que l'utilisateur n'a pas de filtre
                 echo "<script>alert(\"il n'y a pas de filtre\")</script>";
             }
+            echo "<a class='menu_element' href='../index.php'>Accueil</a>";
             //affichage du nom de l'utilisateur
             echo"<h3>".$uti["nom_user"]."</h3>";
             //affichage du prénom de l'utilisateur
             echo"<h3>".$uti["prenom_user"]."</h3>";
-            echo "<a class='menu_element' href='../index.php'>Accueil</a>";
             echo "<h3>Modifier le filtre</h3>";
             //formulaire pour modifier le filtre de l'affichage des commandes
             echo "<form method='post' name='updateFilter' action='' class='text-center'>";
@@ -134,7 +134,7 @@
                 echo "<h3 class='text-center'>".$errorSaisie."</h3>";
             echo "</form>";
         ?>
-        <a class="menu_element" href="deconnexion.php">Déconnexion</a>
+        <a class="menu_element" href="deconnexion_hist_com.php">Déconnexion</a>
     </div>
     <!--si la variable filtreOk est en False alors affichage du formulaire-->
     <div style="display:<?php if($filtreOk) echo 'none';?> ">

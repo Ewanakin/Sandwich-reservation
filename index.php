@@ -19,7 +19,7 @@
             // On définit la variable de session username avec la valeur saisie par l'utilisateur
             $_SESSION['username'] = $_POST["pseudo"];
             // On lance la page index.php à la place de la page actuelle
-            header("Location: Historique_commande/historique_commande.php");
+            header("Location: Historique_commande/hist_com.php");
         }
     ?>
 </body>
