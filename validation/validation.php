@@ -20,7 +20,7 @@
         $chipsChoix = "Non";
     }
     if(isset($_POST['oui']))
-    {   // prépare le requete d'insertion dans la BDD 
+    {   // prépare le requete d'insertion dans la BDD
         $query = $co->prepare('INSERT INTO commande(fk_user_id, fk_sandwich_id,	fk_boisson_id, fk_dessert_id, chips_com, date_heure_livraison_com)
         values(:user, :sandwich, :boisson, :dessert, :chips, :date_heure_liv)');
         // remplir tous les paramètres de la requete
@@ -73,8 +73,8 @@
             ?>
             <form method="post" id="choixResa">
                 <h4>Voulez vous réservez ce menu ?</h4>
-                <button type="submit" name="oui" id="btnOui">Oui je réserve !</button>
-                <button type="submit" name="non" id="btnNon">Non je change d'avis !</button>
+                <button type="submit" name="oui" id="btnOui" onClick="alert('Votre commande a bien été envoyé !')">Oui je réserve !</button>
+                <button type="submit" name="non" id="btnNon">Non je change d'avis !</button>    
             </form>
         </div>
     </section>
