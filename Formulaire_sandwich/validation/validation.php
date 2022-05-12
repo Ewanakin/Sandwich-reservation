@@ -1,6 +1,6 @@
 <?php
-    include('../../connexion/connexion.php'); //inclus le fichier de connexion à la BDD
-    $co = connectDB();
+    include('../../Connexion/connexion.php'); //inclus le fichier de connexion à la BDD
+    $co = connexionBdd();
     session_start();
     include('../session/sessionRecup.php'); //inclus le fichier de recupération des variables session
     include('../requete/requeteValid.php'); //inclus le fichier de requete qui selectionne le noms des aliments par leurs id
@@ -53,8 +53,7 @@
 
     if(isset($_POST['non']))
     {
-        include('../session/sessionReinit.php'); //inclus le fichier de réinitialisation des variables session
-        header('Location: ../FormulaireSandwich/reservationSandwich.php'); // redirige vers le formulaire de commande
+        header('Location: ../reservationSandwich.php'); // redirige vers le formulaire de commande
     }
 
 ?>

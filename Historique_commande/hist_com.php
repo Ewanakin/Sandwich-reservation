@@ -1,79 +1,25 @@
 <?php
-    //initialisation des variables
-    $dateDebut = 0;
-    $dateFin = 0;
-    $filtreOk = True;
-    $errorDate = $errorFiltre = $errorSaisie = "";
     //création de la session
     session_start();
     //appel du fichier connexion.php
     require("../Connexion/connexion.php");
     $co = connexionBdd();
+    
+    //initialisation des variables
+    $dateDebut = 0;
+    $dateFin = 0;
+    $filtreOk = True;
+    $errorDate = $errorFiltre = $errorSaisie = $errorHeureChoix = "";
+    $date = new DateTime(); // objet date qui utilise la date et l'heure courante
+    $dt= $date->format('Y-m-d'); 
+    
     //requete pour afficher l'utilisateur
     $reqUtilisateur = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
     $reqUtilisateur->execute(array($_SESSION["username"]));
     $uti = $reqUtilisateur->fetch();
-    //modification de la date de livraison de la commande
 
-    if(isset($_POST["btnModifLivraison"]))
-    {
-
-        //la variable dateLocale contient l'heure et la date actuelle
-        $dateLocale = date('Y-m-d h:i');
-        //si la date saisie est inférieur à la date acteulle alors error
-        if($_POST["dateModif"] < $dateLocale)
-        {
-            $errorDate = "Vous ne pouvez pas modifier la date de la commande car elle est inferieur à celle du jour";
-        }
-        //si la date est supérieur à celle actuelle alors modification de la date de livraison
-        else
-        {
-            $reqUpdateCommande = $co->prepare("UPDATE commande SET date_heure_livraison_com = ? WHERE id_com = ? ");
-            $reqUpdateCommande->execute(array($_POST["dateModif"],$_POST["btnModifLivraison"]));
-        }
-    }
-    if(isset($_POST["btnSupprLivraison"]))
-    {
-        $supprCom = $co->prepare("UPDATE commande SET annule_com = ? WHERE id_com = ?");
-        $supprCom->execute(array(1,$_POST["btnSupprLivraison"]));
-    }
-    //modificaction du filtre des commandes
-    if(isset($_POST["updateFilter"]))
-    {
-        if($_POST["startFilter"] > $_POST["endFilter"])
-        {
-            $errorFiltre = "merci de choisir une date de début plus petite que celle de fin";
-        }
-        else
-        {
-            $updateFilter = $co->prepare("UPDATE historique SET dateDebut_hist = ? , dateFin_hist = ? WHERE fk_user_id = ?");
-            $updateFilter->execute(array($_POST["startFilter"],$_POST["endFilter"],$uti["id_user"]));
-        }
-    }
-    //ajout d'un nouveau filtre par l'utilisateur
-    if(isset($_POST["btnAjoutFiltre"]))
-    {
-        //test de si un des champs de saisie est vide
-        if(empty($_POST["startFilter"] and $_POST["endFilter"]))
-        {
-            $errorSaisie = "les champs doivent etre séléctionnés";
-        }
-        //si les champs ne sont pas vides test de la saisie
-        else
-        {
-            //si le filtre de départ séléctionné est plus grand que celui de fin alors erreur
-            if($_POST["startFilter"] > $_POST["endFilter"])
-            {
-                $errorFiltre = "merci de choisir une date de début plus petite que celle de fin";
-            }
-            //si la saisie est ok alors insert de la date
-            else
-            {
-                $reqtest = $co->prepare("INSERT INTO historique(dateDebut_hist,dateFin_hist,fk_user_id) VALUES(?,?,?)");
-                $reqtest->execute(array($_POST["startFilter"],$_POST["endFilter"],$uti["id_user"]));
-            }
-        }
-    }
+    //ficher contenant toutes les actions avec les boutons
+    include("../Historique_Commande/actionButton/actionButton.php");
 ?>
 <DOCTYPE html>
 <html>
@@ -92,7 +38,6 @@
         </div>
         <!--affichage de la sidebar-->
         <div id="mySidebar" class="sidebar">
-
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <?php
                 //requete pour afficher les filtres de l'utilisateur
@@ -167,7 +112,7 @@
             $reqDessert->execute();
             $dessert = $reqDessert -> fetch();
             //affichage des commandes;
-            $reqAffichage = $co->prepare("SELECT * FROM commande WHERE date_heure_livraison_com >= ? AND date_heure_livraison_com <= ? AND fk_user_id = ? ORDER BY date_heure_livraison_com DESC ");
+            $reqAffichage = $co->prepare("SELECT * FROM commande WHERE date_heure_livraison_com >= ? AND date_heure_livraison_com <= ? AND fk_user_id = ? ORDER BY date_heure_livraison_com ASC ");
             $reqAffichage->execute(array($dateDebut, $dateFin, $uti["id_user"]));
             //boucle while pour afficher les commandes
             while($row = $reqAffichage -> fetch())
@@ -213,7 +158,19 @@
                                     {
                                         echo "<form method='post' name='button-Up-De' action='' class='formModif'>";
                                             echo "<h4>Modifier la date de la commande</h4>";
-                                            echo "<input name='dateModif' type='datetime-local'><br>";
+                                            ?>
+                                            <div id="dateHeure">
+                                                <?php
+                                                    echo'<input type="date" name="date" value="'.$dt.'">';
+                                                ?>
+                                                <select name="heure">
+                                                    <option value="<?php $heure; ?>" name="desac" disabled selected> Heure de réservation </option>
+                                                    <option value="11:40"> 11:40 </option>
+                                                    <option value="12:35"> 12:35 </option>
+                                                </select>
+                                                <small class="error" id ="errorHeureChoix"> <?php echo $errorHeureChoix; ?> </small>
+                                            </div>
+                                            <?php
                                             echo "<div class='marginButton'>";
                                                 //bouton pour modifier la date de livraison
                                                 echo "<button name='btnModifLivraison' class='bouton_update' type='submit' value=".$row["id_com"].">Modifier la date de commande</button>";

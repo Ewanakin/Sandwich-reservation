@@ -21,7 +21,7 @@
     $query->execute();
     $result = $query->fetch();
 
-    if($result[0] < 1 and !empty($boisson))
+    if($result[0] == 0 and !empty($boisson))
     {
         $isSuccessIndispoBoisson = false;
         $errorDispoBoisson = "La boisson n'est pas disponible.";
@@ -35,7 +35,7 @@
     $query->execute();
     $result = $query->fetch();
 
-    if($result[0] < 1  and !empty($dessert))
+    if($result[0] == 0  and !empty($dessert))
     {
         $isSuccessIndispoDessert = false;
         $errorDispoDessert = "Le dessert n'est pas disponible.";
