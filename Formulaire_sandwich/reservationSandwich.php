@@ -73,6 +73,7 @@
     <link href="reservationSandwich.css" rel="stylesheet">
 </head>
 <body>
+    <?php include("../Templates/header.php");?>
     <section id="Reservation">
         <div id="header">
             <h1><img src="../Images/resa.svg" alt="iconeRepas" class="resa"> Réservez votre repas <img src="../image/resa.svg" alt="iconeRepas" class="resa"></h1>

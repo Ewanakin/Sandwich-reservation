@@ -42,6 +42,7 @@
     <link href="insertion.css" rel="stylesheet">
 </head>
 <body>
+    <?php include("../Templates/header.php");?>
     <section id="insertUserAdmin">
         <form method="post" id="insertForm">
             <select name="roleUser" id="roleUser">

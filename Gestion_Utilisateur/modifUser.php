@@ -44,6 +44,7 @@
         <title>Page Modification utilisateur</title>
     </head>
     <body>
+        <?php include("../Templates/header.php");?>
         <?php
             echo "<div id='table-scroll' class='table-scroll' style='max-width:500px;margin-top: 200px;'>";
             echo " <div class='table-wrap'>";

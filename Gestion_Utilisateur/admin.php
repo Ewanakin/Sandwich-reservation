@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="admin.css">
     </head>
     <body>
+        <?php include("../Templates/header.php");?>
         <!--affichage de la navbar(faire un include)-->
         <div class="navbar">
             <a class="active" href="../index.php">Réservation <br> Sandwich</a>

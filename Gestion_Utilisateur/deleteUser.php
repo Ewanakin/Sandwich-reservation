@@ -51,6 +51,7 @@
         <link href="admin.css" rel="stylesheet">
     </head>
     <body>
+        <?php include("../Templates/header.php");?>
         <?php
             //requete pour afficher les commandes de l'utilisateur
             $reqCommandeUti = $co->prepare("SELECT * FROM commande WHERE fk_user_id = '".$idUser."'");
