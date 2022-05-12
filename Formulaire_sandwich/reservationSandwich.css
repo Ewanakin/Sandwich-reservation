@@ -1,0 +1,409 @@
+html
+{
+    scroll-behavior: smooth;
+    --res: calc(0.01 * 10vmin);
+}
+
+body
+{
+    font-family: 'Lato';
+    background-color: #f4f4f4;
+}
+
+
+.error
+{
+    font-size: calc(18*var(--res));
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media (max-width: 440px)
+{
+    .error{
+        font-size: calc(23*var(--res));
+    }
+}
+
+/* HEADER */
+
+
+#header 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2vh;
+}
+#header h1
+{
+    font-size: calc(50*var(--res));
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    flex-direction: row;
+    font-family: 'lato';
+}
+
+.resa
+{
+    width: 4vw;
+}
+
+#blue_divider
+{
+    width: 10vw;
+    height: 2px;
+    background-color: #fac110;
+    margin: 0 auto;
+}
+
+
+/* liste déroulante */ 
+
+#listederoulante
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10vh;
+}
+
+.listeChoix
+{
+    display: flex;
+    flex-direction: column;
+    width: 17vw;
+    margin: 0 auto;
+}
+
+.listeChoix select
+{
+    width: fit-content;
+    margin: 2vh auto 0 auto;
+    height: 5vh;
+    border: none;
+    border-bottom: 2px solid #1e2d4c;
+    background-color: #f4f4f4;
+    font-size: calc(25*var(--res));
+    color: #1e2d4c;
+}
+
+.listeChoix img
+{
+    width: 7vw;
+    margin: 0 auto;
+}
+
+.nonDispo
+{
+    color: rgba(255, 0, 0, 0.7);
+}
+
+@media (max-width: 440px)
+{
+    #listederoulante
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .listeChoix
+    {
+        width: 50vw;
+    }
+
+    .listeChoix select
+    {
+        font-size: calc(40*var(--res));
+    }
+
+    .listeChoix img
+    {
+        margin-top: 6vh;
+        width: 16vw;
+    }
+}
+
+
+
+/* Choix des chips */
+
+#choixChips
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+#choixChips h4
+{
+    font-size: calc(30*var(--res));
+    margin-bottom: 1vh;
+}
+
+#choixChips img
+{
+    width: 3vw;
+}
+
+#radiobtn
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.radio
+{
+    margin: 2vw;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type='radio']
+{
+    -webkit-appearance: none;
+    width: 2vw;
+    height: 2vw;
+    cursor: pointer;
+    border: 1px solid #1e2d4c;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 0 0 5px 0 #f4f4f4 inset;
+    margin: 0 auto;
+}
+
+input[type='radio']:hover
+{
+    box-shadow: 0 0 5px 0 #1e2d4c inset;
+}
+
+input[type='radio']:before
+{
+    content: "";
+    display: block;
+    width: 60%;
+    height: 60%;
+    margin: 20% auto;
+    border-radius: 50%;
+}
+
+input[type='radio']:checked:before
+{
+    background: #1e2d4c !important;
+}
+
+.radio label
+{
+    font-size: calc(25*var(--res));
+}
+
+@media (max-width: 768px)
+{
+    #choixChips h4
+    {
+        font-size: calc(35*var(--res));
+    }
+
+    #choixChips img
+    {
+        width: 5vw;
+    }
+
+    .radio label
+    {
+        font-size: calc(35*var(--res));
+    }
+
+    input[type='radio']
+    {
+        width: 3vw;
+        height: 3vw;
+    }
+}
+
+/* DATE ET HEURE */
+
+#dateHeure
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 3vh;
+}
+
+#dateHeure h4
+{
+    font-size: calc(30*var(--res));
+    margin-right: 3vw;
+}
+
+#dateHeure input
+{
+    font-size: calc(25*var(--res));
+    margin-right: 2vw;
+    width: fit-content;
+    color: #1e2d4c;
+    border: none;
+    border-bottom: 1px solid #1e2d4c;
+    background-color: #f4f4f4;
+}
+
+#dateHeure select
+{
+    font-size: calc(20*var(--res));
+    color: #1e2d4c;
+    width: fit-content;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #1e2d4c;
+    background-color: #f4f4f4;
+}
+
+#errorHeureChoix
+{
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
+
+@media (max-width: 768px)
+{
+    #dateHeure
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #dateHeure input
+    {
+        margin-right: 0;
+        margin-bottom: 3vh;
+        width: 30vw;
+    }
+    
+    #dateHeure select
+    {
+        font-size: calc(25*var(--res));
+        margin-top: 2vh;
+        width: 30vw;
+    }
+}
+
+@media (max-width: 440px)
+{
+    #dateHeure input
+    {
+        width: 35vw;
+        font-size: calc(30*var(--res));
+    }
+
+    #dateHeure select
+    {
+        width: 35vw;
+        font-size: calc(30*var(--res));
+    }
+}
+
+/* MESSAGE ERREUR */
+
+#errorMessage p
+{
+    font-size: calc(25*var(--res));
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* BOUTTON SUBMIT */
+
+#btnSubmit
+{
+    text-align: center;
+    margin-top: 2vh;
+    overflow: hidden;
+    padding-bottom: 2vh;
+}
+
+
+#btnSubmit button
+{
+    width: 20vw;
+    height: 7vh;
+    font-size: calc(25*var(--res));
+    letter-spacing: 1px;
+    color: #1e2d4c;
+    border: 2px solid #fac110;
+    font-weight: bold;
+    background-color: #f4f4f4;
+    transition: 500ms ease-in-out;
+}
+
+#btnSubmit button:hover
+{
+    box-shadow: 20px 5px 0 #fac110;
+    color: #fac110;
+}
+
+#btnSubmit:focus
+{
+    outline: none;
+}
+
+/*MODAL*/
+
+#modalButton
+{
+    position: sticky;
+    bottom: 5%;
+    left: 5%;
+    font-size: calc(20*var(--res));
+    width: 20vw;
+    background-color: #f4f4f4 !important;
+    border: #1e2d4c 1px solid !important;
+    color: #1e2d4c !important;
+    transition: all .35s ease .35s;
+}
+
+#modalButton:hover
+{
+    background-color: #1e2d4c !important;
+    color: #f4f4f4 !important;
+}
+
+#exampleModalLabel
+{
+    font-size: calc(32*var(--res));
+    color: #1e2d4c;
+}
+
+.modalProduitsIndispo
+{
+    font-size: calc(27*var(--res));
+    color: #1e2d4c;
+    text-decoration: underline 1px #1e2d4c;
+}
+
+.ingreIndispo
+{
+    font-size: calc(22*var(--res));
+    color: grey;
+}
+
+
+.modal-footer button
+{
+    background-color: white;
+    color: #1e2d4c;
+    width: 8vw;
+    font-size: calc(22*var(--res));
+    border: #fac110 1px solid;
+    transition: all .35s ;
+}
+
+.modal-footer button:hover
+{
+    box-shadow: -20px -5px 0 #fac110;
+    background-color: white;
+    color: #fac110;
+    border: #fac110 1px solid;
+}
