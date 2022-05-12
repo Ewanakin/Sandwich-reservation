@@ -1,15 +1,12 @@
 <?php
-    //appel du fichier de connexion à la BDD   
-    require "../Connexion/connexion.php";
-    //$co prend la valeur de retour de la fonction connexionBdd()
+    require("../Connexion/connexion.php");
     $co = connexionBdd();
-    //création de la session
     session_start();
+    $username = $_SESSION["username"];
     if(isset($_POST["btnSupprUti"]))
     {
         // On définit la variable de session username avec la valeur saisie par l'utilisateur
         $_SESSION['id_user'] = $_POST["btnSupprUti"];
-        $_SESSION['username'] = "test";
         // On lance la page index.php à la place de la page actuelle
         header("Location: ../Gestion_Utilisateur/deleteUser.php");
     }
@@ -17,7 +14,6 @@
     {
         // On définit la variable de session username avec la valeur saisie par l'utilisateur
         $_SESSION['id_user'] = $_POST["btnModifUti"];
-        $_SESSION['username'] = "test";
         // On lance la page index.php à la place de la page actuelle
         header("Location: ../Gestion_Utilisateur/modifUser.php");
     }
@@ -32,15 +28,10 @@
         <link rel="stylesheet" href="admin.css">
     </head>
     <body>
-        <?php include("../Templates/header.php");?>
-        <!--affichage de la navbar(faire un include)-->
-        <div class="navbar">
-            <a class="active" href="../index.php">Réservation <br> Sandwich</a>
-            <a style="float: right" href="#news">Se déconnecter</a>
-        </div>
-        <!--redirection vers la création d'un utilisateur-->
-        <a href="../Gestion_Utilisateur/insertion.php">Ajouter un nouvel utilisateur</a>
+        <?php include "../Templates/header.php"?>
         <div id="table-scroll" class="table-scroll" style='max-width:500px;margin-top: 200px;'>
+            <!--redirection vers la création d'un utilisateur-->
+            <a href="../Gestion_Utilisateur/insertion.php">Ajouter un nouvel utilisateur</a>
             <div class="table-wrap">
                 <table class="main-table">
                     <thead>

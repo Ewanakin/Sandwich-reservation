@@ -1,10 +1,8 @@
 <?php
-        //appel du fichier de connexion à la BDD   
-        require "../Connexion/connexion.php";
-        //$co prend la valeur de retour de la fonction connexionBdd()
+        require("../Connexion/connexion.php");
         $co = connexionBdd();
-        //création de la session
         session_start();
+        $username = $_SESSION["username"];
         $idUser = $_SESSION['id_user'];
         if(isset($_POST["modifUser"]))
         {   
@@ -44,7 +42,7 @@
         <title>Page Modification utilisateur</title>
     </head>
     <body>
-        <?php include("../Templates/header.php");?>
+        <?php include "../Templates/header.php"?>
         <?php
             echo "<div id='table-scroll' class='table-scroll' style='max-width:500px;margin-top: 200px;'>";
             echo " <div class='table-wrap'>";

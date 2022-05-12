@@ -5,6 +5,7 @@
     $co = connexionBdd();
     //création de la session
     session_start();
+    $username = $_SESSION["username"];
     $idUser = $_SESSION['id_user'];
     //si bouton annuler l'opération est appuyé
     if(isset($_POST["annuleSuppr"]))

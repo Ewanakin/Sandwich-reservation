@@ -1,7 +1,8 @@
 <?php
-    include('../Connexion/connexion.php');
+    require("../Connexion/connexion.php");
     $co = connexionBdd();
-
+    session_start();
+    $username = $_SESSION["username"];
     $role = $email = $pass = $nom = $prenom = $activeUser = "";
     $errorRole = $errorEmail = $errorPass = $errorNom = $errorPrenom = "";
 
