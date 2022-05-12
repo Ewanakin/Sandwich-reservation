@@ -1,13 +1,28 @@
 <?php
+    $jourInterdit = $jourInterdit = $reservationDate = $reservationDate = $reservationDate ="";
     //modification de la date de livraison de la commande
     if(isset($_POST["btnModifLivraison"]))
     {
+        $reservationDate = $_POST['date']; //récupère la date de réservation
+        $timestampJour = strtotime($reservationDate); //conversion de la date sous format timestamp unix
+        $formatJour="w"; // changement du format de la date en jour de la semaine de 0 à 6
+        $jourInterdit = date($formatJour, $timestampJour); // Création d'une variable qui récupère le numéro de jour pour ensuite le comparer
         $datetime = $_POST["date"] . ' ' . trim(substr($_POST["heure"],0)); //créer une variable avec l'heure et la date 
         $timeStampDateTime = strtotime($datetime); //conversion en timestamp
         $full_date_time = date('Y-m-d-H-i', $timeStampDateTime); //conversion du timestamp en format date et heure complete
-        $reqUpdateCommande = $co->prepare("UPDATE commande SET date_heure_livraison_com = ? WHERE id_com = ? ");
-        $reqUpdateCommande->execute(array($full_date_time,$_POST["btnModifLivraison"]));
-
+        include('../Formulaire_sandwich/verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
+        include('../Formulaire_sandwich/verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
+        include('../Formulaire_sandwich/verif/checkEmpty.php'); // fichier de vérification qu'aucun champ n'est vide
+        if($isSuccessEmpty == true)
+        {
+            $reservationHour = $_POST['heure']; //récupère l'heure de réservation
+        }    
+        include('../Formulaire_sandwich/verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
+        if($isSuccessDateSupp == true and $isSuccessHeure == true and $isSuccessWeekEnd == true and $isSuccessDateAnt == true)
+        {
+            $reqUpdateCommande = $co->prepare("UPDATE commande SET date_heure_livraison_com = ? WHERE id_com = ? ");
+            $reqUpdateCommande->execute(array($full_date_time,$_POST["btnModifLivraison"]));
+        }
     }
     //bouton supression
     if(isset($_POST["btnSupprLivraison"]))

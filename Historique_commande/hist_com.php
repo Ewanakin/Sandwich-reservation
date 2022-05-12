@@ -6,10 +6,10 @@
     $co = connexionBdd();
     
     //initialisation des variables
-    $dateDebut = 0;
-    $dateFin = 0;
+    $dateDebut = $dateFin = 0;
     $filtreOk = True;
-    $errorDate = $errorFiltre = $errorSaisie = $errorHeureChoix = "";
+    $errorHeure = $errorWeekend = $errorDateSupp = $ErrorValue = $heureL = $HeureActuel = $errorHeureChoix = $errorDate = $errorFiltre = $errorSaisie = "";
+    
     $date = new DateTime(); // objet date qui utilise la date et l'heure courante
     $dt= $date->format('Y-m-d'); 
     
@@ -17,9 +17,7 @@
     $reqUtilisateur = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
     $reqUtilisateur->execute(array($_SESSION["username"]));
     $uti = $reqUtilisateur->fetch();
-
-    //ficher contenant toutes les actions avec les boutons
-    include("../Historique_Commande/actionButton/actionButton.php");
+    include("../Historique_commande/actionButton/actionButton.php");
 ?>
 <DOCTYPE html>
 <html>
@@ -179,6 +177,12 @@
                                                 echo "<p>".$errorDate."</p>";
                                             echo "</div>";
                                         echo "</form>";
+                                        echo'<div id="errorMessage">'; // message d'erreur en fonction du problème lors de la validation de la réservation
+                                            echo'<p> '.$errorHeure.' </p>';
+                                            echo'<p> '.$errorWeekend.' </p>';
+                                            echo'<p> '.$errorDateSupp.' </p>';
+                                            echo'<p> '.$ErrorValue.' </p>';
+                                        echo'</div>';
                                     }
                                 ?>
                             </div>
