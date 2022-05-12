@@ -7,7 +7,7 @@
 
     
     $datetime = $date . ' ' . trim(substr($heure,0)); //créer une variable avec l'heure et la date 
-    $timeStampDateTime = strtotime($datetime); //conversion en timestamp
+    $timeStampDateTime = strtotime($datetime); //conversion en timestam
     $full_date_time = date('Y-m-d-H-i', $timeStampDateTime); //conversion du timestamp en format date et heure complete
     $id_user = 1;
     $chipsChoix = "";
@@ -20,19 +20,35 @@
         $chipsChoix = "Non";
     }
     if(isset($_POST['oui']))
-    {   // prépare le requete d'insertion dans la BDD
-        $query = $co->prepare('INSERT INTO commande(fk_user_id, fk_sandwich_id,	fk_boisson_id, fk_dessert_id, chips_com, date_heure_livraison_com)
-        values(:user, :sandwich, :boisson, :dessert, :chips, :date_heure_liv)');
-        // remplir tous les paramètres de la requete
-        $query->bindParam(':user', $id_user);
-        $query->bindParam(':sandwich', $sandwich);
-        $query->bindParam(':boisson', $boisson);
-        $query->bindParam(':dessert', $dessert);
-        $query->bindParam(':chips', $chips);
-        // $query->bindParam('timest', $timestampJour);
-        $query->bindParam(':date_heure_liv', $full_date_time);
-        $query->execute();
-        header('Location: ../../index.php'); // redirige vers l'index
+    {   
+        include('../verif/checkDoublon.php');
+        if($isSuccessDoublon == false)
+        {
+            // prépare le requete d'insertion dans la BDD
+            $query = $co->prepare('INSERT INTO commande(fk_user_id, fk_sandwich_id,	fk_boisson_id, fk_dessert_id, chips_com, date_heure_livraison_com)
+            values(:user, :sandwich, :boisson, :dessert, :chips, :date_heure_liv)');
+            // remplir tous les paramètres de la requete
+            $query->bindParam(':user', $id_user);
+            $query->bindParam(':sandwich', $sandwich);
+            $query->bindParam(':boisson', $boisson);
+            $query->bindParam(':dessert', $dessert);
+            $query->bindParam(':chips', $chips);
+            // $query->bindParam('timest', $timestampJour);
+            $query->bindParam(':date_heure_liv', $full_date_time);
+            $query->execute();
+            header('Location: ../FormulaireSandwich/reservationSandwich.php'); // redirige vers l'index
+        }
+        else
+        {
+            $query = $co->prepare('UPDATE commande SET fk_sandwich_id =:sandwich, fk_boisson_id =:boisson, fk_dessert_id=:dessert, chips =:chips, $date_heure_livraison_com=:date_heure_liv WHERE id_com =:com');
+            $query->bindParam(':sandwich', $sandwich);
+            $query->bindParam(':boisson', $boisson);
+            $query->bindParam(':dessert', $dessert);
+            $query->bindParam(':chips', $chips);
+            $query->bindParam(':date_heure_liv', $full_date_time);
+            $query->bindParam(':com', $_SESSION['id_com']);
+            $query->execute();
+        }
     }
 
     if(isset($_POST['non']))

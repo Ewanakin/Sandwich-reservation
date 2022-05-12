@@ -1,0 +1,57 @@
+html
+{
+    scroll-behavior: smooth;
+    --res: calc(0.01 * 10vmin);
+}
+
+body
+{
+    margin: 0;
+}
+
+/* Mise en forme du footer */
+
+#footerHome
+{
+    width: 100vw;
+    background-color: #1e2d4c;
+    position: absolute;
+    bottom: 0;
+}
+
+#footerCont
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#footerCont h5
+{
+    font-size: calc(15*var(--res));
+    color: white;
+    letter-spacing: 1px;
+    font-weight: lighter;
+}
+
+#footerCont img
+{
+    height: 6vh;
+    margin-top: 3vh;
+}
+
+@media (max-width: 768px)
+{
+    #footerCont h5
+    {
+        font-size: calc(22*var(--res));
+    }
+}
+
+@media (max-width: 440px)
+{
+    #footerCont h5
+    {
+        font-size: calc(25*var(--res));
+    }
+}
