@@ -1,12 +1,12 @@
 <?php
     session_start();
     include('../Connexion/connexion.php');
-    $co = connectDB();
+    $co = connexionBdd();
 
     $date = new DateTime(); // objet date qui utilise la date et l'heure courante
     $dt= $date->format('Y-m-d'); 
     
-    
+    $username = $_SESSION["username"];
     $errorHeure = "";
     $errorHeureChoix = "";
     $errorDate = "";
@@ -28,7 +28,7 @@
         $timestampHeureactuel = strtotime($h); //conversion de l'heure du serveur en timestamp
         $HeureActuel = date('H-i', $timestampHeureactuel); //conversion du timestamp en format date
 
-        include('../verif/checkEmpty.php'); // fichier de vérification qu'aucun champ n'est vide
+        include('../Formulaire_sandwich/verif/checkEmpty.php'); // fichier de vérification qu'aucun champ n'est vide
         if($isSuccessEmpty == true)
         {
             $sandwich = $_POST['sandwich']; //récupère le chhoix du sandwich
@@ -40,20 +40,20 @@
         $chips = $_POST['chips'];//récupère le choix des chips
         $reservationDate = $_POST['date']; //récupère la date de réservation
         $timestampJour = strtotime($reservationDate); //conversion de la date sous format timestamp unix
-        include('../verif/checkValue.php');//fichier de vérification de la value du sandwich.
+        include('../Formulaire_sandwich/verif/checkValue.php');//fichier de vérification de la value du sandwich.
         $formatJour="w"; // changement du format de la date en jour de la semaine de 0 à 6
         $jourInterdit = date($formatJour, $timestampJour); // Création d'une variable qui récupère le numéro de jour pour ensuite le comparer
         
-        include('verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
-        include('verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
-        include('verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
-        include('verif/checkDispo.php'); //fichier de vérification qu'un éléments n'est pas indisponible 
-        include('verif/success.php'); // fichier de vérification que toutes les vérifications sont respectés
+        include('../Formulaire_sandwich/verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
+        include('../Formulaire_sandwich/verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
+        include('../Formulaire_sandwich/verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
+        include('../Formulaire_sandwich/verif/checkDispo.php'); //fichier de vérification qu'un éléments n'est pas indisponible 
+        include('../Formulaire_sandwich/verif/success.php'); // fichier de vérification que toutes les vérifications sont respectés
         
         if($isSuccess == true) // si toutes les vérifications sont bonnes
         {
-            include('session/sessionInit.php');
-            header('Location: validation/validation.php');
+            include('../Formulaire_sandwich/session/sessionInit.php');
+            header('Location: ../Formulaire_sandwich/validation/validation.php');
         }
     }
 ?>

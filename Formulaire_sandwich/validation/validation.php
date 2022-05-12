@@ -1,6 +1,6 @@
 <?php
-    include('../../connexion/connexion.php'); //inclus le fichier de connexion à la BDD
-    $co = connectDB();
+    include('../../Connexion/connexion.php'); //inclus le fichier de connexion à la BDD
+    $co = connexionBdd();
     session_start();
     include('../session/sessionRecup.php'); //inclus le fichier de recupération des variables session
     include('../requete/requeteValid.php'); //inclus le fichier de requete qui selectionne le noms des aliments par leurs id
@@ -32,13 +32,12 @@
         // $query->bindParam('timest', $timestampJour);
         $query->bindParam(':date_heure_liv', $full_date_time);
         $query->execute();
-        header('Location: ../FormulaireSandwich/reservationSandwich.php'); // redirige vers l'index
+        header('Location: ../../index.php'); // redirige vers l'index
     }
 
     if(isset($_POST['non']))
     {
-        include('../session/sessionReinit.php'); //inclus le fichier de réinitialisation des variables session
-        header('Location: ../FormulaireSandwich/reservationSandwich.php'); // redirige vers le formulaire de commande
+        header('Location: ../reservationSandwich.php'); // redirige vers le formulaire de commande
     }
 
 ?>
