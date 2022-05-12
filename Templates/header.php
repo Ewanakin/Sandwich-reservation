@@ -2,7 +2,7 @@
     require("../Connexion/connexion.php");
     $co = connexionBdd();
     session_start();
-    $_SESSION["username"] = "test";
+    $_SESSION["username"] = "";
     $_SESSION["role_user"] = "a";
 ?>
 <!doctype html>
@@ -19,9 +19,10 @@
 
         <header>
                 <?php
-                    //si l'utilisateur connecté est un administrateur
+                    //si un utilisateur est bien connecté
                     if($_SESSION["username"] != "")
                     {
+                        //si l'utilisateur connecté est un administrateur
                         if($_SESSION["role_user"] == "a")
                         {
                             echo "<ul>";
@@ -31,6 +32,7 @@
                                 echo "<li><a href=''>Deconnexion</a></li>";
                             echo "</ul>";
                         }
+                        //si l'utilisateur connecté est un eleve
                         else
                         {   
                             echo "<ul>";
@@ -42,7 +44,7 @@
                         }
                     }
                     //si aucun utilisateur n'est connecté
-                    if($_SESSION["username"] == "")
+                    else
                     {
                         echo "<ul>";
                             echo "<li><a href=''>Reservation Sandwich</a></li>";
@@ -51,7 +53,6 @@
                         echo "</ul>";
                     }
                 ?>
-            </ul>
         </header>
 
 
