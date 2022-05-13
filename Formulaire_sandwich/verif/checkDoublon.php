@@ -1,7 +1,7 @@
 <?php
-    session_start();
 
-    $query = $co->prepare('SELECT date_heure_livraison_com, id_com FROM commande WHERE fk_id_user = session[id_user] LIMIT 8');
+    $query = $co->prepare('SELECT date_heure_livraison_com, id_com FROM commande WHERE fk_user_id = :id_user LIMIT 8');
+    $query->bindParam(':id_user', $_SESSION['id_user']);
     $query->execute();
 
     $temp = $temp2 = array();

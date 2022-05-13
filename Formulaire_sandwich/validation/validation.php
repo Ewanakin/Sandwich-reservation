@@ -1,5 +1,5 @@
 <?php
-    include('../../Connexion/connexion.php'); //inclus le fichier de connexion à la BDD
+    include('../../connexion/connexion.php'); //inclus le fichier de connexion à la BDD
     $co = connexionBdd();
     session_start();
     include('../session/sessionRecup.php'); //inclus le fichier de recupération des variables session
@@ -7,9 +7,9 @@
 
     
     $datetime = $date . ' ' . trim(substr($heure,0)); //créer une variable avec l'heure et la date 
-    $timeStampDateTime = strtotime($datetime); //conversion en timestam
+    $timeStampDateTime = strtotime($datetime); //conversion en timestamp
     $full_date_time = date('Y-m-d-H-i', $timeStampDateTime); //conversion du timestamp en format date et heure complete
-    $id_user = 1;
+    $_SESSION['id_user'] = 1;
     $chipsChoix = "";
     if($chips == 1 ) //insertion des chips en base de données 1 pour oui et 0 pour non, conditions pour afficher oui ou non en fonction de la value
     {
@@ -20,8 +20,7 @@
         $chipsChoix = "Non";
     }
     if(isset($_POST['oui']))
-    {   
-        include('../verif/checkDoublon.php');
+    {           include('../verif/checkDoublon.php');
         if($isSuccessDoublon == false)
         {
             // prépare le requete d'insertion dans la BDD
@@ -36,11 +35,11 @@
             // $query->bindParam('timest', $timestampJour);
             $query->bindParam(':date_heure_liv', $full_date_time);
             $query->execute();
-            header('Location: ../FormulaireSandwich/reservationSandwich.php'); // redirige vers l'index
+            header('Location: ../../index.php'); // redirige vers l'index
         }
         else
         {
-            $query = $co->prepare('UPDATE commande SET fk_sandwich_id =:sandwich, fk_boisson_id =:boisson, fk_dessert_id=:dessert, chips =:chips, $date_heure_livraison_com=:date_heure_liv WHERE id_com =:com');
+            $query = $co->prepare('UPDATE commande SET fk_sandwich_id =:sandwich, fk_boisson_id =:boisson, fk_dessert_id=:dessert, chips_com =:chips, date_heure_livraison_com=:date_heure_liv WHERE id_com =:com');
             $query->bindParam(':sandwich', $sandwich);
             $query->bindParam(':boisson', $boisson);
             $query->bindParam(':dessert', $dessert);
@@ -48,11 +47,13 @@
             $query->bindParam(':date_heure_liv', $full_date_time);
             $query->bindParam(':com', $_SESSION['id_com']);
             $query->execute();
+            header('Location: ../../index.php'); // redirige vers l'index
         }
     }
 
     if(isset($_POST['non']))
     {
+        include('../session/sessionReinit.php'); //inclus le fichier de réinitialisation des variables session
         header('Location: ../reservationSandwich.php'); // redirige vers le formulaire de commande
     }
 
