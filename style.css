@@ -1,0 +1,96 @@
+body {
+  background: #1e2d4c;
+}
+.box {
+  /* border: 1px solid #c4c4c4; */
+  padding: 30px 25px 10px 25px;
+  /* background: white; */
+  margin: 100px auto;
+  width: 70%;
+}
+h1.box-logo a {
+  text-decoration:none;
+  font-family: 'Roboto', sans-serif;
+}
+h1.box-title {
+  color: #FFFF;
+  /* background: #f8f8f8; */
+  font-weight: 300;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 50px;
+  text-align:center;
+  margin: -27px -26px 26px;
+  font-family: 'Roboto', sans-serif;
+}
+.box-button {
+  border-radius: 5px;
+  background: #FAC110;
+  text-align: center;
+  cursor: pointer;
+  font-size: 19px;
+  width: 20%;
+  height: 51px;
+  padding: 0;
+  color: #fff;
+  border: 0;
+  outline:0;
+  margin-left: 40%;margin-top: 30px;margin-bottom: 25px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.box-register
+{
+  text-align:center;
+  margin-bottom:0px;
+  font-size: 23px;color: white;
+  font-family: 'Roboto', sans-serif;
+}
+.box-register a
+{
+  text-decoration:none;
+  font-size: px;
+  color: #FAC110;
+}
+.box-input {
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 25px;
+  padding-left:10px;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+}
+.box-input:focus {
+  outline: none;
+  border-color:#5c7186;
+}
+.sucess{
+  text-align: center;
+  color: white;
+}
+.sucess a {
+  text-decoration: none;
+  color: #58aef7;
+}
+p.errorMessage {
+  background-color: #e66262;
+  border: #AA4502 1px solid;
+  padding: 5px 10px;
+  color: #FFFFFF;
+  border-radius: 3px;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+.menuThumbnail {
+  width : 25%;
+  display: flex;
+  margin-top: 1000px;
+}
+
+.menuPicker {
+
+}
