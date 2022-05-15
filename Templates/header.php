@@ -23,9 +23,9 @@
                         {
                             echo "<ul>";
                                 echo "<li><a href='./index.php'>Reservation Sandwich</a></li>";
-                                echo "<li><a href='./admin.php'>Gestion des utilisateurs</a></li>";
-                                echo "<li><a href='./menuManager.php'>Modification Accueil</a></li>";
-                                echo "<li><a href='./Connexion/deconnexion.php'>Deconnexion</a></li>";
+                                echo "<li style='float: right; padding-right: 100px'><a href='./admin.php'>Gestion des utilisateurs</a></li>";
+                                echo "<li style='float: right; padding-right: 20px'><a href='./menuManager.php'>Modification Accueil</a></li>";
+                                echo "<li style='float: right; padding-right: 20px'><a href='./Connexion/deconnexion.php'>Deconnexion</a></li>";
                             echo "</ul>";
                         }
                         //si l'utilisateur connecté est un eleve
@@ -33,9 +33,9 @@
                         {   
                             echo "<ul>";
                                 echo "<li><a href='./index.php'>Reservation Sandwich</a></li>";
-                                echo "<li><a href='./reservationSandwich.php'>passer une commande</a></li>";
-                                echo "<li><a href='./Historique_commande/hist_com.php'>historique des commandes</a></li>";
-                                echo "<li><a href='./Connexion/deconnexion.php'>Deconnexion</a></li>";
+                                echo "<li style='float: right; padding-right: 100px'><a href='./reservationSandwich.php'>passer une commande</a></li>";
+                                echo "<li style='float: right; padding-right: 20px'><a href='./Historique_commande/hist_com.php'>historique des commandes</a></li>";
+                                echo "<li style='float: right; padding-right: 20px'><a href='./Connexion/deconnexion.php'>Deconnexion</a></li>";
                             echo "</ul>";
                         }
                     }
@@ -44,8 +44,8 @@
                     {
                         echo "<ul>";
                             echo "<li><a href='./index.php'>Reservation Sandwich</a></li>";
-                            echo "<li><a href='./register.php'>S'inscrire</a></li>";
-                            echo "<li><a href='./login.php'>Se connecter</a></li>";
+                            echo "<li style='float: right; padding-right: 100px'><a href='./register.php'>S'inscrire</a></li>";
+                            echo "<li style='float: right; padding-right: 20px'><a href='./login.php'>Se connecter</a></li>";
                         echo "</ul>";
                     }
                 ?>
