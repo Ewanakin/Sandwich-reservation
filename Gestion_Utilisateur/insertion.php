@@ -20,13 +20,13 @@
             //requete pour insert un utilisateur
             $insertUser = $co->prepare("INSERT INTO utilisateur (role_user, email_user, password_user, nom_user, prenom_user, active_user) VALUES(?,?,?,?,?,?)");
             $insertUser->execute(array($role,$email,$pass,$nom,$prenom,$activeUser));
-            header("Location: admin.php");
+            header("Location: ../admin.php");
             exit;
         }
     }
     if(isset($_POST["annuler"]))
     {
-        header("Location: admin.php");
+        header("Location: ../admin.php");
         exit;
     }
 ?>
@@ -43,7 +43,6 @@
     <link href="insertion.css" rel="stylesheet">
 </head>
 <body>
-    <?php include("../Templates/header.php");?>
     <section id="insertUserAdmin">
         <form method="post" id="insertForm">
             <select name="roleUser" id="roleUser">

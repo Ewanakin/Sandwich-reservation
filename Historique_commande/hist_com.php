@@ -65,7 +65,7 @@
                 echo"<h3>".$uti["nom_user"]."</h3>";
                 //affichage du prénom de l'utilisateur
                 echo"<h3>".$uti["prenom_user"]."</h3>";
-                echo "<a class='menu_element' href='../Formulaire_sandwich/reservationsandwich.php'>Commander</a>";
+                echo "<a class='menu_element' href='../reservationSandwich.php'>Commander</a>";
                 echo "<h3>Modifier le filtre</h3>";
                 //formulaire pour modifier le filtre de l'affichage des commandes
                 echo "<form method='post' name='updateFilter' action='' class='text-center'>";

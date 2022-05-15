@@ -1,6 +1,9 @@
 <?php
-require('../formulaire/class/connexion.php');
-require('./component/navbar.php')
+    require("Connexion/connexion.php");
+    $co = connexionBdd();
+    session_start();
+    $username = $_SESSION["username"];
+    require('Templates/header.php')
 ?>
 
 <!doctype html>
@@ -16,8 +19,9 @@ require('./component/navbar.php')
 <body>
 
     <?php
-
-    $homeData = (new db)->fetch('SELECT * FROM accueil');
+    $homeData = $co->prepare("SELECT * FROM accueil");
+    $homeData->execute();
+    $homeData = $homeData->fetch();
     ?>
 
 <div class="menu">

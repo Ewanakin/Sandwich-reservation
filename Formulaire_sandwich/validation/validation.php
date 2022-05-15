@@ -9,7 +9,7 @@
     $datetime = $date . ' ' . trim(substr($heure,0)); //créer une variable avec l'heure et la date 
     $timeStampDateTime = strtotime($datetime); //conversion en timestamp
     $full_date_time = date('Y-m-d-H-i', $timeStampDateTime); //conversion du timestamp en format date et heure complete
-    $_SESSION['id_user'] = 1;
+    $id_user = $_SESSION["id_user"];
     $chipsChoix = "";
     if($chips == 1 ) //insertion des chips en base de données 1 pour oui et 0 pour non, conditions pour afficher oui ou non en fonction de la value
     {
@@ -54,7 +54,7 @@
     if(isset($_POST['non']))
     {
         include('../session/sessionReinit.php'); //inclus le fichier de réinitialisation des variables session
-        header('Location: ../reservationSandwich.php'); // redirige vers le formulaire de commande
+        header('Location: ../../reservationSandwich.php'); // redirige vers le formulaire de commande
     }
 
 ?>

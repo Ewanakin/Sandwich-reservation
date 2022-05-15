@@ -15,10 +15,10 @@ if (isset($_POST['credentials'])) {
             $_POST['credentials']['password']
         )) {
         if ($_SESSION['user']['role_user'] === 'a'){
-            header('location: login.php');
+            header('location: ./login.php');
         }
         else {
-            header('location: login.php');
+            header('location: ./login.php');
         }
     } else {
         return "Email ou mot de passe incorrect";
@@ -53,6 +53,8 @@ if (isset($_POST['username'], $_POST['email'], $_POST['password'])){
 
         <p class="box-register">Déjà inscrit?
             <a href="login.php">Connectez-vous ici</a></p>
+        <p class="box-register">retourner au menu
+        <a href="./index.php">cliquez ici</a></p>
     </form>
 <?php } ?>
 </body>

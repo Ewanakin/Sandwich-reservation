@@ -1,5 +1,5 @@
 <?php
-    require("./Connexion/connexion.php");
+    require("Connexion/connexion.php");
     $co = connexionBdd();
     session_start();
     $username = $_SESSION["username"];
@@ -8,14 +8,14 @@
         // On définit la variable de session username avec la valeur saisie par l'utilisateur
         $_SESSION['id_user'] = $_POST["btnSupprUti"];
         // On lance la page index.php à la place de la page actuelle
-        header("Location: Gestion_Utilisateur/deleteUser.php");
+        header("Location: ./Gestion_Utilisateur/deleteUser.php");
     }
     if(isset($_POST["btnModifUti"]))
     {
         // On définit la variable de session username avec la valeur saisie par l'utilisateur
         $_SESSION['id_user'] = $_POST["btnModifUti"];
         // On lance la page index.php à la place de la page actuelle
-        header("Location: Gestion_Utilisateur/modifUser.php");
+        header("Location: ./Gestion_Utilisateur/modifUser.php");
     }
 ?>
 <!DOCTYPE html>
@@ -25,10 +25,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Page gestion des utilisateurs</title>
-        <link rel="stylesheet" href="admin.css">
+        <link rel="stylesheet" href="./Gestion_Utilisateur/admin.css">
     </head>
     <body>
-        <?php include "Templates/header.php"?>
+        <?php include "./Templates/header.php"?>
         <div id="table-scroll" class="table-scroll" style='max-width:500px;margin-top: 200px;'>
             <!--redirection vers la création d'un utilisateur-->
             <a href="./Gestion_Utilisateur/insertion.php">Ajouter un nouvel utilisateur</a>

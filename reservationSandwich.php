@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../Connexion/connexion.php');
+    include('./Connexion/connexion.php');
     $co = connexionBdd();
 
     $date = new DateTime(); // objet date qui utilise la date et l'heure courante
@@ -28,7 +28,7 @@
         $timestampHeureactuel = strtotime($h); //conversion de l'heure du serveur en timestamp
         $HeureActuel = date('H-i', $timestampHeureactuel); //conversion du timestamp en format date
 
-        include('verif/checkEmpty.php'); // fichier de vérification qu'aucun champ n'est vide
+        include('./Formulaire_sandwich/verif/checkEmpty.php'); // fichier de vérification qu'aucun champ n'est vide
         if($isSuccessEmpty == true)
         {
             $sandwich = $_POST['sandwich']; //récupère le chhoix du sandwich
@@ -40,20 +40,20 @@
         $chips = $_POST['chips'];//récupère le choix des chips
         $reservationDate = $_POST['date']; //récupère la date de réservation
         $timestampJour = strtotime($reservationDate); //conversion de la date sous format timestamp unix
-        include('verif/checkValue.php');//fichier de vérification de la value du sandwich.
+        include('./Formulaire_sandwich/verif/checkValue.php');//fichier de vérification de la value du sandwich.
         $formatJour="w"; // changement du format de la date en jour de la semaine de 0 à 6
         $jourInterdit = date($formatJour, $timestampJour); // Création d'une variable qui récupère le numéro de jour pour ensuite le comparer
         
-        include('verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
-        include('verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
-        include('verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
-        include('verif/checkDispo.php'); //fichier de vérification qu'un éléments n'est pas indisponible 
-        include('verif/success.php'); // fichier de vérification que toutes les vérifications sont respectés
+        include('./Formulaire_sandwich/verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
+        include('./Formulaire_sandwich/verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle
+        include('./Formulaire_sandwich/verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
+        include('./Formulaire_sandwich/verif/checkDispo.php'); //fichier de vérification qu'un éléments n'est pas indisponible 
+        include('./Formulaire_sandwich/verif/success.php'); // fichier de vérification que toutes les vérifications sont respectés
         
         if($isSuccess == true) // si toutes les vérifications sont bonnes
         {
-            include('session/sessionInit.php');
-            header('Location: validation/validation.php');
+            include('./Formulaire_sandwich/session/sessionInit.php');
+            header('Location: ./Formulaire_sandwich/validation/validation.php');
         }
     }
 ?>
@@ -70,9 +70,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> <!--CDN JS poour bootstrap-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Pacifico&display=swap" rel="stylesheet">
-    <link href="reservationSandwich.css" rel="stylesheet">
+    <link href="./Formulaire_sandwich/reservationSandwich.css" rel="stylesheet">
 </head>
 <body>
+    <?php require("./Templates/header.php");?>
     <section id="Reservation">
         <div id="header">
             <h1><img src="../Images/resa.svg" alt="iconeRepas" class="resa"> Réservez votre repas <img src="../Images/resa.svg" alt="iconeRepas" class="resa"></h1>
@@ -85,7 +86,7 @@
                         $query = $co->prepare('SELECT * FROM sandwich'); //selectionne tous les éléments de la table sandwich
                         $query->execute();
                         echo   '<div class="listeChoix">
-                                <img src="../Images/sandwichLogo2.svg" alt="sandwich">
+                                <img src="./Images/sandwichLogo2.svg" alt="sandwich">
                                 <Select name="sandwich">
                                     <option value="'.$sandwich.'" disabled selected>Choisir un sandwich</option>';
                                 while($result = $query->fetch()) // stock dans un tableau le résultat 
@@ -108,7 +109,7 @@
                         $query = $co->prepare('SELECT * FROM boisson');
                         $query->execute();
                     echo    '<div class="listeChoix">
-                                <img src="../Images/canette.svg" alt="boisson">
+                                <img src="./Images/canette.svg" alt="boisson">
                                 <Select name="boisson">
                                     <option value="'.$boisson.'" disabled selected>Choisir une boisson</option>';
                                 while($result = $query->fetch())
@@ -131,7 +132,7 @@
                         $query = $co->prepare('SELECT * FROM dessert');
                         $query->execute();
                     echo    '<div class="listeChoix">
-                                <img src="../Images/cookie.svg" alt="dessert">
+                                <img src="./Images/cookie.svg" alt="dessert">
                                 <Select name="dessert">
                                     <option value="'.$dessert.'" disabled selected>Choisir un dessert</option>';
                                 while($result = $query->fetch())
@@ -152,7 +153,7 @@
                     ?>
                 </div>
                 <div id="choixChips">        
-                    <h4>Voulez-vous des chips ? <img src="../Images/chips.png" alt="chips"></h4>
+                    <h4>Voulez-vous des chips ? <img src="./Images/chips.png" alt="chips"></h4>
                     <div id="radiobtn">
                         <div class="radio">
                             <label for="oui">Oui</label>

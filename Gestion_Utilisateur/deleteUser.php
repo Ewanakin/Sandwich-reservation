@@ -10,7 +10,7 @@
     //si bouton annuler l'opération est appuyé
     if(isset($_POST["annuleSuppr"]))
     {
-        header("Location: admin.php");
+        header("Location: ../admin.php");
         exit;
     }
     //si bouton supprimer l'utilisateur appuyé
@@ -30,7 +30,7 @@
         $reqDeleteUser = $co->prepare("DELETE FROM utilisateur WHERE id_user = ?");
         $reqDeleteUser->execute(array($idUser));
         //retour sur la page admin.php
-        header("Location: admin.php");
+        header("Location: ../admin.php");
         exit;
     }
     //si bouton désactivé est appuyé
@@ -38,7 +38,7 @@
     {
         $desacUser = $co->prepare("UPDATE utilisateur SET active_user = ? WHERE id_user = ?");
         $desacUser->execute(array(0,$idUser));
-        header("Location: admin.php");
+        header("Location: ../admin.php");
         exit;
     }
 ?>
@@ -52,7 +52,6 @@
         <link href="admin.css" rel="stylesheet">
     </head>
     <body>
-        <?php include("../Templates/header.php");?>
         <?php
             //requete pour afficher les commandes de l'utilisateur
             $reqCommandeUti = $co->prepare("SELECT * FROM commande WHERE fk_user_id = '".$idUser."'");
