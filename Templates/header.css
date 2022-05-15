@@ -23,7 +23,7 @@ body {
 }
 
 ul {
-    position: fixed;
+    position: absolute;
     top: 0;
     list-style-type: none;
     top: 0;
