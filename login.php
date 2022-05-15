@@ -14,7 +14,7 @@ if (isset($_POST['submitUser'])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $userToTest = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ? and password_user = ?");
-    $userToTest->execute(array($email, $password));
+    $userToTest->execute(array($email, password_hash($password, PASSWORD_ARGON2I)));
     $resUser = $userToTest->fetch();
     $idUser = $resUser["id_user"];
     $nbUser = $userToTest->rowCount();
