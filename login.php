@@ -11,17 +11,17 @@ session_start();
 require('./Connexion/connexion.php');
 if (isset($_POST['submitUser'])) {
     $co = connexionBdd();
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    echo (password_hash($_POST["password"], PASSWORD_ARGON2I));
+    echo $_POST["email"];
     $userToTest = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ? and password_user = ?");
-    $userToTest->execute(array($email, password_hash($password, PASSWORD_ARGON2I)));
+    $userToTest->execute(array($_POST["email"], password_hash($_POST["password"], PASSWORD_ARGON2I)));
     $resUser = $userToTest->fetch();
-    $idUser = $resUser["id_user"];
     $nbUser = $userToTest->rowCount();
-    if($nbUser == 1)
+    echo $nbUser;
+    if($nbUser != 0)
     {
         $_SESSION["username"] = $email;
-        $_SESSION["id_user"] = $idUser;
+        $_SESSION["id_user"] = $resUser["id_user"];
         header("Location: ./index.php");
     }
     else
