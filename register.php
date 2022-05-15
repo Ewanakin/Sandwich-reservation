@@ -10,9 +10,13 @@ $co = connexionBdd();
 session_start();
 if(isset($_POST['createUser'])) 
 {
-    $userToTest = $co->prepare("INSERT INTO utilisateur(role_user, email_user, password_user, nom_user, prenom_user, active_user) VALUES('a', ?,?,?,?, 1) ");
+    $userToTest = $co->prepare("INSERT INTO utilisateur(role_user, email_user, password_user, nom_user, prenom_user, active_user) VALUES('b', ?,?,?,?, 1) ");
     $userToTest->execute(array($_POST["email"], password_hash($_POST["password"], PASSWORD_ARGON2I), $_POST['nom'], $_POST['prenom']));
+    $selectUser = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
+    $selectUser->execute(array($_POST["email"]));
+    $resUser = $selectUser->fetch();
     $_SESSION["username"] = $_POST["email"];
+    $_SESSION["id_user"] = $resUser["id_user"];
     header("Location: ./index.php");
 
 }
