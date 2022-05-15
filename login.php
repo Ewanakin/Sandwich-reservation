@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+$idUser = "";
 session_start();
 require('./Connexion/connexion.php');
 if (isset($_POST['submitUser'])) {
