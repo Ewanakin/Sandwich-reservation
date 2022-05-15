@@ -28,7 +28,8 @@ ul {
     overflow: hidden;
     background-color: #1e2d4c;
     height: 70px;
-    position: fixed;
+    position: absolute;
+    top: 0;
     width: 100%;
 }
 
