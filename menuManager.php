@@ -14,14 +14,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap" rel="stylesheet">
     </head>
     <body>
-        <?php include("./Templates/header.php");?>
+        <?php include("Templates/header.php");?>
     </body>
 </html>
 
     <?php
     function changeMenu($path){
         $changeMenu = $co->prepare('UPDATE `accueil` SET `lien_pdf` = ? WHERE `accueil`.`id_accueil` = ?');
-        $changeMenu->ecevute($path,1);
+        $changeMenu->execute($path,0);
     }
     $homeData = $co->prepare('SELECT * FROM accueil');
     $homeData->execute();
@@ -48,3 +48,16 @@
         </div>     
         <?php 
     }
+    ?>
+    <h1>modification du texte de la page d'acceuil</h1>
+    <form method="post">
+        <input name="text" value="">
+        <input type="submit" name="submitText" value="Modifier">
+    </form>
+    <?php
+        if(isset($_POST["submitText"]))
+        {
+            $changeText = $co->prepare("UPDATE `accueil` SET `texte_accueil` = ? WHERE `accueil`.`id_accueil` = ?");
+            $changeText->execute(array($_POST["text"], 0));
+        }
+    ?>

@@ -11,22 +11,37 @@ session_start();
 require('./Connexion/connexion.php');
 if (isset($_POST['submitUser'])) {
     $co = connexionBdd();
-    echo (password_hash($_POST["password"], PASSWORD_ARGON2I));
-    echo $_POST["email"];
-    $userToTest = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ? and password_user = ?");
-    $userToTest->execute(array($_POST["email"], password_hash($_POST["password"], PASSWORD_ARGON2I)));
-    $resUser = $userToTest->fetch();
-    $nbUser = $userToTest->rowCount();
-    echo $nbUser;
-    if($nbUser != 0)
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    if(empty($email) or empty($password))
     {
-        $_SESSION["username"] = $email;
-        $_SESSION["id_user"] = $resUser["id_user"];
-        header("Location: ./index.php");
+        $message = "merci de remplir les champs";
     }
     else
     {
-        $message = "votre email ou mot de passe est invalid";
+        $stmt = $co->prepare("SELECT password_user FROM utilisateur WHERE email_user = ?"); 
+        // on execute la requete
+        $stmt->execute(array($email));
+        // on va chercher récuperer les resultats
+        $user = $stmt->fetch();
+        $nbUSer = $stmt->rowCount();
+        if($nbUSer == 1)
+        {
+            if(password_verify($password, $user['password_user']))
+            { 
+                $_SESSION["username"] = $email;
+                $_SESSION["id_user"] = $password;
+                header("Location: ./index.php");
+            }else{
+                // Si la requête ne retourne rien, alors l'utilisateur ou mdp n'existe pas dans la BD, on lui
+                // affiche un message d'erreur
+                $message = "email ou mot de passe incorrect.";
+            }
+        }
+        else
+        {
+            $message = "email ou mot de passe incorrect.";
+        }
     }
 }
 
