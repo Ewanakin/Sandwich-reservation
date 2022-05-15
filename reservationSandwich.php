@@ -76,7 +76,7 @@
     <?php require("./Templates/header.php");?>
     <section id="Reservation">
         <div id="header">
-            <h1><img src="../Images/resa.svg" alt="iconeRepas" class="resa"> Réservez votre repas <img src="../Images/resa.svg" alt="iconeRepas" class="resa"></h1>
+            <h1><img src="Images/resa.svg" alt="iconeRepas" class="resa"> Réservez votre repas <img src="Images/resa.svg" alt="iconeRepas" class="resa"></h1>
             <span id="blue_divider"></span>
         </div>
         <div id="ResExt">

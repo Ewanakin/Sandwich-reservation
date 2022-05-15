@@ -23,13 +23,13 @@ body {
 }
 
 ul {
+    position: fixed;
+    top: 0;
     list-style-type: none;
     top: 0;
     overflow: hidden;
     background-color: #1e2d4c;
     height: 70px;
-    position: absolute;
-    top: 0;
     width: 100%;
 }
 
