@@ -6,11 +6,10 @@
     $query->execute();
     $result = $query->fetch();
 
-    if($result[0] < 1 and !empty($sandwich))
+    if($result[0] == 0 and !empty($sandwich))
     {
         $isSuccessIndispoSandwich = false;
         $errorDispoSandwich = "Le sandwich n'est pas disponible.";
-
     }
     else{
         $isSuccessIndispoSandwich = true;
