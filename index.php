@@ -28,9 +28,9 @@
     <object class="pdfmenu" data="<?= $homeData['lien_pdf'] ?>"/>
 <!--    <img src="presentation-restauration-rapide-sandwich-set-de-table-a3.jpg" style="width: 60%; display: inline-block">-->
 </div>
-<div class="footer">
-    <p>Ceci est un footer</p>
-</div>
+<?php
+    include('Templates/footer.php');
+?>
 
 </body>
 </html>

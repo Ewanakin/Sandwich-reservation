@@ -191,6 +191,7 @@
                     echo "</div>";
                 echo "</div>";
             }
+            include('../Templates/footer.php');
         ?>   
 
     </body>

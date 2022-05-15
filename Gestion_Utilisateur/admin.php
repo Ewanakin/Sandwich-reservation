@@ -74,8 +74,6 @@
             </div>
         </div>
         <!--affichage du footer-->
-        <footer>
-            <p>Footer Saint-Vincent</p>
-        </footer>
+        <?php include('../Templates/footer.php'); ?>
     </body>
 </html>

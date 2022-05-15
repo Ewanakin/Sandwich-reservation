@@ -56,6 +56,8 @@ if (isset($_POST['username'], $_POST['email'], $_POST['password'])){
         <p class="box-register">retourner au menu
         <a href="./index.php">cliquez ici</a></p>
     </form>
-<?php } ?>
+<?php } 
+    include('Templates/footer.php'); 
+?>
 </body>
 </html>

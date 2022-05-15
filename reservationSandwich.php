@@ -235,5 +235,8 @@
             </div>
         </div>
     </section>
+    <?php
+        include('Templates/footer.php');
+    ?>
 </body>
 </html>

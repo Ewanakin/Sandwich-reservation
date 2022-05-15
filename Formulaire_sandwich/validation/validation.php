@@ -20,7 +20,7 @@
         $chipsChoix = "Non";
     }
     if(isset($_POST['oui']))
-    {           include('../verif/checkDoublon.php');
+    {   include('../verif/checkDoublon.php');
         if($isSuccessDoublon == false)
         {
             // prépare le requete d'insertion dans la BDD
@@ -53,7 +53,6 @@
 
     if(isset($_POST['non']))
     {
-        include('../session/sessionReinit.php'); //inclus le fichier de réinitialisation des variables session
         header('Location: ../../reservationSandwich.php'); // redirige vers le formulaire de commande
     }
 
@@ -94,5 +93,6 @@
             </form>
         </div>
     </section>
+    <?php include('../../Templates/footer.php') ?>
 </body>
 </html>
