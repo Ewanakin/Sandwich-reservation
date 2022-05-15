@@ -1,5 +1,7 @@
 <?php
-require('./class/connexion.php');
+require('./Connexion/connexion.php');
+$co = connexionBdd();
 
-$changeMenu = (new db)->update('UPDATE `accueil` SET `lien_pdf` = ? WHERE `accueil`.`id_accueil` = ?' , [$_POST['menu'], 1]);
+$changeMenu = $co->prepare('UPDATE `accueil` SET `lien_pdf` = ? WHERE `accueil`.`id_accueil` = ?');
+$changeMenu->execute(array($_POST['menu'], 1));
 header('location: ./menuManager.php');

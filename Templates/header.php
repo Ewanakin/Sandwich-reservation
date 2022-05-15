@@ -24,7 +24,7 @@
                             echo "<ul>";
                                 echo "<li><a href='./index.php'>Reservation Sandwich</a></li>";
                                 echo "<li><a href='./admin.php'>Gestion des utilisateurs</a></li>";
-                                echo "<li><a href=''>Modification Accueil</a></li>";
+                                echo "<li><a href='./menuManager.php'>Modification Accueil</a></li>";
                                 echo "<li><a href='./Connexion/deconnexion.php'>Deconnexion</a></li>";
                             echo "</ul>";
                         }
