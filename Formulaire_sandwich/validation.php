@@ -1,9 +1,15 @@
 <?php
-    include('../../connexion/connexion.php'); //inclus le fichier de connexion à la BDD
-    $co = connexionBdd();
+	// R�cup�ration des donn�es de la session
     session_start();
-    include('../session/sessionRecup.php'); //inclus le fichier de recupération des variables session
-    include('../requete/requeteValid.php'); //inclus le fichier de requete qui selectionne le noms des aliments par leurs id
+	// V�rifie si l'utilisateur est connect�, sinon redirection vers la page de connexion
+	if(!isset($_SESSION["username"])){
+		header("Location: login.php");
+		exit(); 
+	}
+    include('../Connexion/connexion.php'); //inclus le fichier de connexion à la BDD
+    $co = connexionBdd();
+    include('session/sessionRecup.php'); //inclus le fichier de recupération des variables session
+    include('requete/requeteValid.php'); //inclus le fichier de requete qui selectionne le noms des aliments par leurs id
 
     
     $datetime = $date . ' ' . trim(substr($heure,0)); //créer une variable avec l'heure et la date 
@@ -20,7 +26,7 @@
         $chipsChoix = "Non";
     }
     if(isset($_POST['oui']))
-    {   include('../verif/checkDoublon.php');
+    {   include('verif/checkDoublon.php');
         if($isSuccessDoublon == false)
         {
             // prépare le requete d'insertion dans la BDD
@@ -35,7 +41,7 @@
             // $query->bindParam('timest', $timestampJour);
             $query->bindParam(':date_heure_liv', $full_date_time);
             $query->execute();
-            header('Location: ../../index.php'); // redirige vers l'index
+            header('Location: ../index.php'); // redirige vers l'index
         }
         else
         {
@@ -47,13 +53,13 @@
             $query->bindParam(':date_heure_liv', $full_date_time);
             $query->bindParam(':com', $_SESSION['id_com']);
             $query->execute();
-            header('Location: ../../index.php'); // redirige vers l'index
+            header('Location: ../index.php'); // redirige vers l'index
         }
     }
 
     if(isset($_POST['non']))
     {
-        header('Location: ../../reservationSandwich.php'); // redirige vers le formulaire de commande
+        header('Location: ../reservationSandwich.php'); // redirige vers le formulaire de commande
     }
 
 ?>
@@ -93,6 +99,5 @@
             </form>
         </div>
     </section>
-    <?php include('../../Templates/footer.php') ?>
 </body>
 </html>

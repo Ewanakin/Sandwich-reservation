@@ -29,8 +29,12 @@ if (isset($_POST['submitUser'])) {
         {
             if(password_verify($password, $user['password_user']))
             { 
+		        $selUser = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
+		        $selUser->execute(array($email));
+		        $resUser = $selUser->fetch();
                 $_SESSION["username"] = $email;
-                $_SESSION["id_user"] = $password;
+                $_SESSION["id_user"] = $resUser["id_user"];
+                $_SESSION["role_user"] = $resUser["role_user"];
                 header("Location: ./index.php");
             }else{
                 // Si la requête ne retourne rien, alors l'utilisateur ou mdp n'existe pas dans la BD, on lui

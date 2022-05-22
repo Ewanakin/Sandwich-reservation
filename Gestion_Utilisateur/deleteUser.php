@@ -1,10 +1,16 @@
 <?php
+	// Récupération des données de la session
+	session_start();
+
+	// Vérifie si l'utilisateur est connecté, sinon redirection vers la page de connexion
+    if($_SESSION["role_user"] != "a"){
+		header("Location: login.php");
+		exit(); 
+	}
     //appel du fichier de connexion à la BDD   
     require "../Connexion/connexion.php";
     //$co prend la valeur de retour de la fonction connexionBdd()
     $co = connexionBdd();
-    //création de la session
-    session_start();
     $username = $_SESSION["username"];
     $idUser = $_SESSION['id_user'];
     //si bouton annuler l'opération est appuyé

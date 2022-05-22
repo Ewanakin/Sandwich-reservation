@@ -1,14 +1,6 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>Sandwicherie</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./Templates/header.css">
-    </head>
-    <body>
+    <body style="margin: 0;">
 
         <header>
                 <?php
@@ -34,7 +26,7 @@
                             echo "<ul>";
                                 echo "<li><a href='./index.php'>Reservation Sandwich</a></li>";
                                 echo "<li style='float: right; padding-right: 100px'><a href='./reservationSandwich.php'>passer une commande</a></li>";
-                                echo "<li style='float: right; padding-right: 20px'><a href='./Historique_commande/hist_com.php'>historique des commandes</a></li>";
+                                echo "<li style='float: right; padding-right: 20px'><a href='./Historique_commande.php'>historique des commandes</a></li>";
                                 echo "<li style='float: right; padding-right: 20px'><a href='./Connexion/deconnexion.php'>Deconnexion</a></li>";
                             echo "</ul>";
                         }

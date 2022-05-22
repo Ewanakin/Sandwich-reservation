@@ -17,6 +17,7 @@ if(isset($_POST['createUser']))
     $resUser = $selectUser->fetch();
     $_SESSION["username"] = $_POST["email"];
     $_SESSION["id_user"] = $resUser["id_user"];
+    $_SESSION["role_user"] = $resUser["role_user"];
     header("Location: ./index.php");
 
 }

@@ -16,9 +16,9 @@
             $datetime = $_POST["date"] . ' ' . trim(substr($_POST["heure"],0)); //créer une variable avec l'heure et la date 
             $timeStampDateTime = strtotime($datetime); //conversion en timestamp
             $full_date_time = date('Y-m-d-H-i', $timeStampDateTime); //conversion du timestamp en format date et heure complete
-            include('../Formulaire_sandwich/verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
-            include('../Formulaire_sandwich/verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle  
-            include('../Formulaire_sandwich/verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
+            include('./Historique_commande/verif/checkWeekEnd.php'); // fichier vérification d'interdictio de commande en week end
+            include('./Historique_commande/verif/checkDate.php'); // fichier d'interdiction de commande à une date antérieur et de commande à + d'une semaine d'intervalle  
+            include('./Historique_commande/verif/checkHeure.php'); //fichier verification d'interdiction de commande pour le jour même après 9h30
             if($isSuccessDateSupp == true and $isSuccessHeure == true and $isSuccessWeekEnd == true and $isSuccessDateAnt == true)
             {
                 $reqUpdateCommande = $co->prepare("UPDATE commande SET date_heure_livraison_com = ? WHERE id_com = ? ");

@@ -18,6 +18,7 @@
    </head>
 <body>
     <?php
+    echo $_SESSION['id_user'];
     include "Templates/header.php";
     $homeData = $co->prepare("SELECT * FROM accueil");
     $homeData->execute();
@@ -27,7 +28,7 @@
         <p><?= $homeData["texte_accueil"];?></p>
     </div>
     <div class="menu">
-        <object class="pdfmenu" data="<?= $homeData['lien_pdf'] ?>"/>
+        <object class="pdfmenu" data="<?= $homeData['lien_pdf'] ?>"></object>
     </div>
     <?php
         include('Templates/footer.php');

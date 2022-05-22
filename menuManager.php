@@ -1,7 +1,14 @@
 <?php
+	// Récupération des données de la session
+	session_start();
+
+	// Vérifie si l'utilisateur est connecté, sinon redirection vers la page de connexion
+	if($_SESSION["role_user"] != "a"){
+		header("Location: login.php");
+		exit(); 
+	}
     require('./Connexion/connexion.php');
     $co = connexionBdd();
-    session_start();
     $username = $_SESSION["username"];
 ?>
 <html>

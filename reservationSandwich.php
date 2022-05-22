@@ -1,5 +1,12 @@
 <?php
-    session_start();
+	// Récupération des données de la session
+	session_start();
+
+	// Vérifie si l'utilisateur est connecté, sinon redirection vers la page de connexion
+	if(!isset($_SESSION["username"])){
+		header("Location: login.php");
+		exit(); 
+	}
     include('./Connexion/connexion.php');
     $co = connexionBdd();
 
@@ -53,7 +60,7 @@
         if($isSuccess == true) // si toutes les vérifications sont bonnes
         {
             include('./Formulaire_sandwich/session/sessionInit.php');
-            header('Location: ./Formulaire_sandwich/validation/validation.php');
+            header('Location: ./Formulaire_sandwich/validation.php');
         }
     }
 ?>
@@ -71,6 +78,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Pacifico&display=swap" rel="stylesheet">
     <link href="./Formulaire_sandwich/reservationSandwich.css" rel="stylesheet">
+    <link href="./Templates/header.css" rel="stylesheet">
 </head>
 <body>
     <?php require("./Templates/header.php");?>

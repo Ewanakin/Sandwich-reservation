@@ -1,35 +1,42 @@
 <?php
-        require("../Connexion/connexion.php");
-        $co = connexionBdd();
-        session_start();
-        $username = $_SESSION["username"];
-        $idUser = $_SESSION['id_user'];
-        if(isset($_POST["modifUser"]))
-        {   
-            //si le champ password n'est pas remplia lors update des informations sans le mot de passe pour évitter de le changer
-            if(empty($_POST["passwordUser"]))
-            {
-                //requete pour modifier les informations de l'utilisateur
-                $modifUser = $co->prepare("UPDATE utilisateur SET email_user = ?, nom_user = ?, prenom_user = ?, active_user = ? WHERE id_user = ?");
-                $modifUser->execute(array($_POST["emailUser"],$_POST["nomUser"],$_POST["prenomUser"],$_POST["activeUser"], $idUser));
-            }
-            // si le champ password est rempli alors modifier les informations avec le mot de passe
-            else
-            {
-                //chiffrement du mot de passe avec argon2i
-                $password = password_hash($_POST["passwordUser"], PASSWORD_ARGON2I);
-                //requete pour modifier les informations de l'utilisateur
-                $modifUser = $co->prepare("UPDATE utilisateur SET email_user = ?, password_user = ?, nom_user = ?, prenom_user = ?, active_user = ? WHERE id_user = ?");
-                $modifUser->execute(array($_POST["emailUser"],$password,$_POST["nomUser"],$_POST["prenomUser"],$_POST["activeUser"], $idUser));
-            }
-            header("Location: ../admin.php");
-            exit;
-        }
-        if(isset($_POST["annulModif"]))
+	// Récupération des données de la session
+	session_start();
+
+	// Vérifie si l'utilisateur est connecté, sinon redirection vers la page de connexion
+	if($_SESSION["role_user"] != "a"){
+		header("Location: login.php");
+		exit(); 
+	}
+    require("../Connexion/connexion.php");
+    $co = connexionBdd();
+    $username = $_SESSION["username"];
+    $idUser = $_SESSION['id_user'];
+    if(isset($_POST["modifUser"]))
+    {   
+        //si le champ password n'est pas remplia lors update des informations sans le mot de passe pour évitter de le changer
+        if(empty($_POST["passwordUser"]))
         {
-            header("Location: ../admin.php");
-            exit;
+            //requete pour modifier les informations de l'utilisateur
+            $modifUser = $co->prepare("UPDATE utilisateur SET email_user = ?, nom_user = ?, prenom_user = ?, active_user = ? WHERE id_user = ?");
+            $modifUser->execute(array($_POST["emailUser"],$_POST["nomUser"],$_POST["prenomUser"],$_POST["activeUser"], $idUser));
         }
+        // si le champ password est rempli alors modifier les informations avec le mot de passe
+        else
+        {
+            //chiffrement du mot de passe avec argon2i
+            $password = password_hash($_POST["passwordUser"], PASSWORD_ARGON2I);
+            //requete pour modifier les informations de l'utilisateur
+            $modifUser = $co->prepare("UPDATE utilisateur SET email_user = ?, password_user = ?, nom_user = ?, prenom_user = ?, active_user = ? WHERE id_user = ?");
+            $modifUser->execute(array($_POST["emailUser"],$password,$_POST["nomUser"],$_POST["prenomUser"],$_POST["activeUser"], $idUser));
+        }
+        header("Location: ../admin.php");
+        exit;
+    }
+    if(isset($_POST["annulModif"]))
+    {
+        header("Location: ../admin.php");
+        exit;
+    }
         
 ?>
 <!DOCTYPE html>

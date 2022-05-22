@@ -7,9 +7,8 @@
 		header("Location: login.php");
 		exit(); 
 	}
-    //appel du fichier connexion.php 
-
-    require("./Connexion/connexion.php");
+    //appel du fichier connexion.php
+    require("Connexion/connexion.php");
     $co = connexionBdd();
     
     //initialisation des variables
@@ -24,7 +23,7 @@
     $reqUtilisateur = $co->prepare("SELECT * FROM utilisateur WHERE email_user = ?");
     $reqUtilisateur->execute(array($_SESSION["username"]));
     $uti = $reqUtilisateur->fetch();
-    include("../Historique_commande/actionButton/actionButton.php");
+    include("./Historique_commande/actionButton/actionButton.php");
 ?>
 <DOCTYPE html>
 <html>
@@ -34,7 +33,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <link href="../Historique_commande/hist_com.css" rel="stylesheet">
         <meta charset="utf-8">
-        <script src="../Historique_commande/menu_hist_com.js"></script>
+        <script src="./Historique_commande/menu_hist_com.js"></script>
     </head>
     <body>  
         <!--bouton pour afficher la sidebar-->
@@ -198,7 +197,7 @@
                     echo "</div>";
                 echo "</div>";
             }
-            include('../Templates/footer.php');
+            include('./Templates/footer.php');
         ?>   
 
     </body>
