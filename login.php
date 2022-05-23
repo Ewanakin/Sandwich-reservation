@@ -35,6 +35,7 @@ if (isset($_POST['submitUser'])) {
                 $_SESSION["username"] = $email;
                 $_SESSION["id_user"] = $resUser["id_user"];
                 $_SESSION["role_user"] = $resUser["role_user"];
+                $_SESSION["active_user"] = $resUser["active_user"];
                 header("Location: ./index.php");
             }else{
                 // Si la requête ne retourne rien, alors l'utilisateur ou mdp n'existe pas dans la BD, on lui

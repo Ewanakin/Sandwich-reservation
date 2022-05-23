@@ -7,6 +7,12 @@
 		header("Location: login.php");
 		exit(); 
 	}
+    if($_SESSION["active_user"] == 0)
+    {
+        echo "<script> Vous n'êtes pas autorisé à commander </script>";
+        header("Location: index.php");
+        exit();
+    }
     include('./Connexion/connexion.php');
     $co = connexionBdd();
 
