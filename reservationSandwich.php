@@ -9,10 +9,10 @@
 	}
     if($_SESSION["active_user"] == 0)
     {
-        echo "<script> Vous n'êtes pas autorisé à commander </script>";
-        header("Location: index.php");
+        $_SESSION['messageActivUser'] = "Vous ne pouvez pas commander";
+        header('Location: index.php');
         exit();
-    }
+    } 
     include('./Connexion/connexion.php');
     $co = connexionBdd();
 

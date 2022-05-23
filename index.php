@@ -18,6 +18,14 @@
    </head>
 <body>
     <?php
+        if(isset($_SESSION['messageActivUser']))
+        {   
+            echo "<script type='text/javascript'> 
+                    alert('".$_SESSION['messageActivUser']."'); 
+                </script>";
+        }
+    ?>
+    <?php
     echo $_SESSION['id_user'];
     include "Templates/header.php";
     $homeData = $co->prepare("SELECT * FROM accueil");
